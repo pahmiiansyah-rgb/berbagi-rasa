@@ -177,45 +177,49 @@
 
                     <div class="card-body">
                         <div class="store-label">
-                            <i class="fa-solid fa-store" style="color: var(--primary);"></i>
+                            <i class="fa-solid fa-store"></i>
                             <span><?= e($item['nama_donatur']) ?></span>
                         </div>
 
-                        <h3 class="card-title"><?= e($item['judul']) ?></h3>
+                        <h3 class="card-title" title="<?= e($item['judul']) ?>"><?= e($item['judul']) ?></h3>
 
                         <!-- Price Section (Original vs Discounted) -->
                         <div class="price-container-3d">
-                            <?php if (($item['tipe_penawaran'] ?? '') === 'gratis_peduli' || (int)($item['harga_diskon'] ?? 0) === 0): ?>
-                                <div class="price-original">
+                            <div class="price-left-block">
+                                <span class="price-original-label">
                                     Normal: <del><?= formatRupiah((int)($item['harga_asli'] ?? 0)) ?></del>
-                                </div>
-                                <div class="price-final free">
-                                    Rp 0 <span class="price-note">(Peduli Rantau)</span>
-                                </div>
-                            <?php else: ?>
-                                <div class="price-original">
-                                    Normal: <del><?= formatRupiah((int)($item['harga_asli'] ?? 0)) ?></del>
-                                </div>
-                                <div class="price-final">
-                                    <?= formatRupiah((int)($item['harga_diskon'] ?? 0)) ?>
-                                    <span class="price-unit">/ <?= e($item['satuan']) ?></span>
-                                </div>
-                            <?php endif; ?>
+                                </span>
+                                <?php if (($item['tipe_penawaran'] ?? '') === 'gratis_peduli' || (int)($item['harga_diskon'] ?? 0) === 0): ?>
+                                    <div class="price-final-deal free">
+                                        Rp 0 <span class="price-unit-text">(Peduli Rantau)</span>
+                                    </div>
+                                <?php else: ?>
+                                    <div class="price-final-deal">
+                                        <?= formatRupiah((int)($item['harga_diskon'] ?? 0)) ?>
+                                        <span class="price-unit-text">/ <?= e($item['satuan']) ?></span>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                            <div class="price-right-tag">
+                                <span class="price-deal-badge">
+                                    <i class="fa-solid fa-bolt"></i> <?= (($item['tipe_penawaran'] ?? '') === 'gratis_peduli' || (int)($item['harga_diskon'] ?? 0) === 0) ? 'Peduli' : 'Closing Deal' ?>
+                                </span>
+                            </div>
                         </div>
 
                         <div class="card-meta-list">
-                            <div class="meta-item" title="Jam Tutup Toko">
+                            <div class="meta-item" title="Jam Tutup Toko: <?= e($item['jam_tutup'] ?? '21:00 WIB') ?>">
                                 <i class="fa-solid fa-door-closed" style="color: #f59e0b;"></i>
-                                <span>Tutup Toko: <strong style="color: #fbbf24;"><?= e($item['jam_tutup'] ?? '21:00 WIB') ?></strong></span>
+                                <span>Tutup: <strong><?= e($item['jam_tutup'] ?? '21:00 WIB') ?></strong></span>
                             </div>
 
-                            <div class="meta-item" title="Lokasi Pengambilan">
+                            <div class="meta-item" title="<?= e($item['lokasi_ambil']) ?>">
                                 <i class="fa-solid fa-location-dot"></i>
                                 <span><?= e($item['lokasi_ambil']) ?></span>
                             </div>
 
-                            <div class="meta-item quality-guarantee" title="Jaminan Kebersihan">
-                                <i class="fa-solid fa-shield-heart" style="color: #10b981;"></i>
+                            <div class="meta-item quality-guarantee" title="<?= e($item['jaminan_kualitas'] ?? '100% Segar & Higienis') ?>">
+                                <i class="fa-solid fa-shield-heart"></i>
                                 <span><?= e($item['jaminan_kualitas'] ?? '100% Segar & Higienis') ?></span>
                             </div>
                         </div>
