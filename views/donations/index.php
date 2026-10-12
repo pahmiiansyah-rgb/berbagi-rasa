@@ -16,13 +16,12 @@
 
     <div class="hero-editorial-container">
         <div class="hero-editorial-content">
-            <div style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.82rem; font-weight: 750; color: #34d399; background: rgba(16, 185, 129, 0.15); padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(16, 185, 129, 0.3); margin-bottom: 16px;">
+            <div class="hero-mission-pill">
                 <i class="fa-solid fa-leaf"></i> Gerakan Mengurangi Pangan Terbuang
             </div>
 
             <h1 class="hero-editorial-title">
-                Makanan enak hari ini<br>
-                tak perlu berakhir di tempat sampah.
+                Makanan enak hari ini tak perlu berakhir di tempat sampah.
             </h1>
 
             <p class="hero-editorial-subtitle">
