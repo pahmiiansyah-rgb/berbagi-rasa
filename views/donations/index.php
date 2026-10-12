@@ -1,46 +1,48 @@
 <?php
 /**
- * View Katalog Makanan Berkualitas Murah Jelang Tutup Toko
- * Cinematic Dark Edition (Shopify Aesthetic)
+ * View Landing Page Pengenalan Gerakan - Berbagi Rasa
+ * Humanized AI Copywriting & Authentic Storytelling
  */
 ?>
 
-<!-- Full-Bleed Cinematic Hero Section (Shopify Style) -->
+<!-- 1. Hero Section (Shopify Dark Editorial Composition) -->
 <section id="home" class="hero-shopify-section">
     <!-- Background Looping Video with Poster Fallback -->
     <video class="hero-video-bg" autoplay muted loop playsinline poster="<?= ASSET_URL ?>/assets/images/hero-cinematic.jpg">
         <source src="<?= ASSET_URL ?>/assets/videos/hero-bg.mp4" type="video/mp4">
     </video>
 
-    <!-- Dark Ambient Vignette & Gradient Overlays -->
     <div class="hero-video-overlay"></div>
 
-    <!-- Editorial Text & CTA Content (Shopify Left-Aligned Composition) -->
     <div class="hero-editorial-container">
         <div class="hero-editorial-content">
+            <div style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.82rem; font-weight: 750; color: #34d399; background: rgba(16, 185, 129, 0.15); padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(16, 185, 129, 0.3); margin-bottom: 16px;">
+                <i class="fa-solid fa-leaf"></i> Gerakan Mengurangi Pangan Terbuang
+            </div>
+
             <h1 class="hero-editorial-title">
-                Makanan berkualitas<br>
-                Harga ramah di kantong.
+                Makanan enak hari ini<br>
+                tak perlu berakhir di tempat sampah.
             </h1>
 
             <p class="hero-editorial-subtitle">
-                Selamatkan makanan lezat berkualitas prima sebelum restoran dan toko tutup. 100% higienis, hemat hingga 80%, ditebus langsung di kasir toko.
+                Setiap malam, banyak resto, kafe, dan toko roti menyisakan makanan yang baru dimasak tapi belum sempat terbeli. Berbagi Rasa menghubungkan pemilik usaha kuliner dengan siapa saja yang ingin makan enak dengan harga ramah kantong—atau diambil gratis bagi teman rantau yang sedang kesulitan.
             </p>
 
             <div class="hero-editorial-actions">
-                <a href="#features" class="btn-shopify-white">
-                    Jelajah Fitur Menu
+                <a href="<?= BASE_URL ?>?url=donation/catalog" class="btn-shopify-white">
+                    <i class="fa-solid fa-bowl-food"></i> Lihat Menu Makanan Malam Ini
                 </a>
-                <a href="#our-work" class="btn-shopify-pill-ghost">
-                    <span class="play-icon-circle"><i class="fa-solid fa-play"></i></span>
-                    <span>Karya & Misi Gerakan</span>
+                <a href="#cara-kerja" class="btn-shopify-pill-ghost">
+                    <span class="play-icon-circle"><i class="fa-solid fa-circle-question"></i></span>
+                    <span>Bagaimana Cara Kerjanya?</span>
                 </a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Impact Metrics Ribbon (Dark Glassmorphism) -->
+<!-- 2. Ringkasan Dampak Nyata (Metrics Ribbon) -->
 <section class="metrics-ribbon-section">
     <div class="container">
         <div class="metrics-grid-cinematic">
@@ -50,7 +52,7 @@
                 </div>
                 <div class="metric-data">
                     <span class="metric-value"><?= formatRupiah($stats['total_rupiah_dihemat'] ?? 0) ?></span>
-                    <span class="metric-desc">Total Rupiah Dihemat Pengguna</span>
+                    <span class="metric-desc">Biaya Makan yang Berhasil Dihemat</span>
                 </div>
             </div>
 
@@ -59,7 +61,7 @@
                     <i class="fa-solid fa-bowl-food"></i>
                 </div>
                 <div class="metric-data">
-                    <span class="metric-value"><?= number_format($stats['total_makanan_terselamatkan'] ?? 0) ?>+ Porsi</span>
+                    <span class="metric-value"><?= number_format($stats['total_makanan_terselamatkan'] ?? 0) ?> Porsi</span>
                     <span class="metric-desc">Makanan Segar Terselamatkan</span>
                 </div>
             </div>
@@ -69,356 +71,273 @@
                     <i class="fa-solid fa-store"></i>
                 </div>
                 <div class="metric-data">
-                    <span class="metric-value"><?= number_format($stats['total_donatur'] ?? 0) ?> Mitra</span>
-                    <span class="metric-desc">Resto & Bakery Bergabung</span>
+                    <span class="metric-value"><?= number_format($stats['total_donatur'] ?? 0) ?> Tempat</span>
+                    <span class="metric-desc">Resto, Warung, &amp; Bakery Bergabung</span>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Main Features & Catalog Section -->
-<div class="container" id="features" style="padding-top: 48px; padding-bottom: 64px;">
-    <span id="katalog" style="display:block; position:relative; top:-90px; visibility:hidden;"></span>
-    <!-- Filter & Search Bar (Sleek Dark Theme) -->
-    <div class="filter-bar-cinematic">
-        <form action="<?= BASE_URL ?>" method="GET" class="filter-form-cinematic">
-            <input type="hidden" name="url" value="donation/index">
-
-            <!-- Search Input -->
-            <div class="input-cinematic-wrap">
-                <i class="fa-solid fa-magnifying-glass input-cinematic-icon"></i>
-                <input 
-                    type="text" 
-                    name="q" 
-                    class="form-control-cinematic" 
-                    placeholder="Cari menu makanan, bakery, bento, resto..." 
-                    value="<?= e($keyword) ?>"
-                >
-            </div>
-
-            <!-- Location Filter Dropdown -->
-            <div class="input-cinematic-wrap">
-                <i class="fa-solid fa-location-dot input-cinematic-icon"></i>
-                <select name="lokasi" class="form-control-cinematic">
-                    <option value="">Semua Lokasi Penjemputan</option>
-                    <?php foreach ($locations as $loc): ?>
-                        <option value="<?= e($loc) ?>" <?= ($lokasi === $loc) ? 'selected' : '' ?>>
-                            <?= e($loc) ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-
-            <!-- Price Tier Filter Dropdown -->
-            <div class="input-cinematic-wrap">
-                <i class="fa-solid fa-tags input-cinematic-icon"></i>
-                <select name="harga" class="form-control-cinematic">
-                    <option value="">Semua Harga</option>
-                    <option value="under_10k" <?= ($filterHarga === 'under_10k') ? 'selected' : '' ?>>Maksimal Rp 10.000</option>
-                    <option value="diskon_tinggi" <?= ($filterHarga === 'diskon_tinggi') ? 'selected' : '' ?>>Diskon &gt; 70%</option>
-                    <option value="gratis" <?= ($filterHarga === 'gratis') ? 'selected' : '' ?>>Gratis Peduli Rantau (Rp 0)</option>
-                </select>
-            </div>
-
-            <!-- Submit Filter Button -->
-            <button type="submit" class="btn-filter-cinematic">
-                <i class="fa-solid fa-filter"></i> Saring Menu
-            </button>
-
-            <!-- Reset Button -->
-            <?php if (!empty($keyword) || !empty($lokasi) || !empty($filterHarga)): ?>
-                <a href="<?= BASE_URL ?>?url=donation/index" class="btn-reset-cinematic">
-                    <i class="fa-solid fa-rotate-left"></i> Reset
-                </a>
-            <?php endif; ?>
-        </form>
-    </div>
-
-    <!-- Section Title & Results Count -->
-    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; flex-wrap: wrap; gap: 12px;">
-        <div>
-            <h2 style="font-size: 1.48rem; font-weight: 800; color: #ffffff; letter-spacing: -0.02em; margin-bottom: 6px;">
-                Menu Siap Tebus Malam Ini
-            </h2>
-            <p style="font-size: 0.9rem; color: #94a3b8; margin: 0;">
-                Batch segar produksi hari ini yang belum terjual saat toko bersiap tutup. Ambil langsung di kasir toko.
-            </p>
-        </div>
-        <span style="font-size: 0.88rem; color: #64748b; font-weight: 600;">
-            Menampilkan <strong style="color: #e2e8f0;"><?= count($donations) ?></strong> dari <strong style="color: #e2e8f0;"><?= $totalItems ?></strong> menu aktif
-        </span>
-    </div>
-
-    <!-- Dark Luxury Food Cards Grid -->
-    <?php if (!empty($donations)): ?>
-        <div class="card-grid-cinematic">
-            <?php foreach ($donations as $item): ?>
-                <a href="<?= BASE_URL ?>?url=donation/show/<?= (int)$item['id'] ?>" class="food-card-cinematic">
-                    <div class="card-image-wrap">
-                        <?php if (!empty($item['foto']) && file_exists(UPLOAD_DIR . $item['foto'])): ?>
-                            <img src="<?= APP_URL ?>/assets/uploads/<?= e($item['foto']) ?>" alt="<?= e($item['judul']) ?>" loading="lazy">
-                        <?php else: ?>
-                            <div class="card-image-placeholder">
-                                <i class="fa-solid fa-utensils"></i>
-                            </div>
-                        <?php endif; ?>
-
-                        <!-- Quota Badge Floating -->
-                        <div class="badge-quota-floating">
-                            <i class="fa-solid fa-box"></i> Sisa <?= (int)$item['sisa'] ?> <?= e($item['satuan']) ?>
-                        </div>
-
-                        <!-- Discount / Promo Badge Floating -->
-                        <div class="badge-discount-floating">
-                            <?= discountBadge((int)($item['harga_asli'] ?? 0), (int)($item['harga_diskon'] ?? 0), $item['tipe_penawaran'] ?? 'diskon_toko') ?>
-                        </div>
-                    </div>
-
-                    <div class="card-body">
-                        <div class="store-label">
-                            <i class="fa-solid fa-store"></i>
-                            <span><?= e($item['nama_donatur']) ?></span>
-                        </div>
-
-                        <h3 class="card-title" title="<?= e($item['judul']) ?>"><?= e($item['judul']) ?></h3>
-
-                        <!-- Price Section (Original vs Discounted) -->
-                        <div class="price-container-3d">
-                            <div class="price-left-block">
-                                <span class="price-original-label">
-                                    Normal: <del><?= formatRupiah((int)($item['harga_asli'] ?? 0)) ?></del>
-                                </span>
-                                <?php if (($item['tipe_penawaran'] ?? '') === 'gratis_peduli' || (int)($item['harga_diskon'] ?? 0) === 0): ?>
-                                    <div class="price-final-deal free">
-                                        Rp 0 <span class="price-unit-text">(Peduli Rantau)</span>
-                                    </div>
-                                <?php else: ?>
-                                    <div class="price-final-deal">
-                                        <?= formatRupiah((int)($item['harga_diskon'] ?? 0)) ?>
-                                        <span class="price-unit-text">/ <?= e($item['satuan']) ?></span>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-                            <div class="price-right-tag">
-                                <span class="price-deal-badge">
-                                    <i class="fa-solid fa-bolt"></i> <?= (($item['tipe_penawaran'] ?? '') === 'gratis_peduli' || (int)($item['harga_diskon'] ?? 0) === 0) ? 'Peduli' : 'Closing Deal' ?>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="card-meta-list">
-                            <div class="meta-item" title="Jam Tutup Toko: <?= e($item['jam_tutup'] ?? '21:00 WIB') ?>">
-                                <i class="fa-solid fa-door-closed" style="color: #f59e0b;"></i>
-                                <span>Tutup: <strong><?= e($item['jam_tutup'] ?? '21:00 WIB') ?></strong></span>
-                            </div>
-
-                            <div class="meta-item" title="<?= e($item['lokasi_ambil']) ?>">
-                                <i class="fa-solid fa-location-dot"></i>
-                                <span><?= e($item['lokasi_ambil']) ?></span>
-                            </div>
-
-                            <div class="meta-item quality-guarantee" title="<?= e($item['jaminan_kualitas'] ?? '100% Segar & Higienis') ?>">
-                                <i class="fa-solid fa-shield-heart"></i>
-                                <span><?= e($item['jaminan_kualitas'] ?? '100% Segar & Higienis') ?></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card-footer-cinematic">
-                        <div class="countdown-tag-cinematic" title="Batas Waktu Penjemputan">
-                            <i class="fa-regular fa-clock"></i> <?= timeRemaining($item['expired_at']) ?>
-                        </div>
-                        <span class="btn-card-action">
-                            Tebus Menu <i class="fa-solid fa-arrow-right"></i>
-                        </span>
-                    </div>
-                </a>
-            <?php endforeach; ?>
-        </div>
-
-        <!-- Pagination -->
-        <?php if ($totalPages > 1): ?>
-            <div class="pagination-wrap" style="margin-top: 40px;">
-                <?php if ($page > 1): ?>
-                    <a href="<?= BASE_URL ?>?url=donation/index&q=<?= urlencode($keyword) ?>&lokasi=<?= urlencode($lokasi) ?>&harga=<?= urlencode($filterHarga) ?>&page=<?= $page - 1 ?>" class="page-btn">
-                        <i class="fa-solid fa-chevron-left"></i>
-                    </a>
-                <?php endif; ?>
-
-                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                    <a href="<?= BASE_URL ?>?url=donation/index&q=<?= urlencode($keyword) ?>&lokasi=<?= urlencode($lokasi) ?>&harga=<?= urlencode($filterHarga) ?>&page=<?= $i ?>" class="page-btn <?= ($page === $i) ? 'active' : '' ?>">
-                        <?= $i ?>
-                    </a>
-                <?php endfor; ?>
-
-                <?php if ($page < $totalPages): ?>
-                    <a href="<?= BASE_URL ?>?url=donation/index&q=<?= urlencode($keyword) ?>&lokasi=<?= urlencode($lokasi) ?>&harga=<?= urlencode($filterHarga) ?>&page=<?= $page + 1 ?>" class="page-btn">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </a>
-                <?php endif; ?>
-            </div>
-        <?php endif; ?>
-
-    <?php else: ?>
-        <!-- Empty State -->
-        <div class="empty-state-cinematic">
-            <div class="empty-icon"><i class="fa-solid fa-store-slash"></i></div>
-            <h3>Belum Ada Menu Promo yang Cocok</h3>
-            <p>
-                Saat ini belum ada menu makanan dengan kriteria pencarian tersebut. Restoran dan bakery biasanya mulai mengunggah penawaran closing deals menjelang sore hingga malam hari (17.00 - 21.00 WIB).
-            </p>
-            <a href="<?= BASE_URL ?>?url=donation/index" class="btn-pill-primary" style="margin-top: 16px;">
-                Tampilkan Semua Penawaran
-            </a>
-        </div>
-    <?php endif; ?>
-
-</div> <!-- /#features container -->
-
-<!-- Section Layanan Ekosistem (#service) -->
-<div class="container" id="service" style="padding-top: 36px; padding-bottom: 24px;">
-    <section class="services-section-cinematic">
-        <div style="text-align: center; max-width: 680px; margin: 0 auto 36px auto;">
-            <span class="mission-badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">
-                <i class="fa-solid fa-hand-holding-heart"></i> Ekosistem Layanan
+<!-- 3. Kenapa Berbagi Rasa Ada? (#tentang) -->
+<section id="tentang" style="padding-top: 64px; padding-bottom: 56px;">
+    <div class="container">
+        <div style="text-align: center; max-width: 720px; margin: 0 auto 48px auto;">
+            <span class="mission-badge" style="background: rgba(16, 185, 129, 0.12); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.25);">
+                <i class="fa-solid fa-heart"></i> Cerita di Balik Berbagi Rasa
             </span>
-            <h2 style="font-size: 1.85rem; font-weight: 800; color: #ffffff; letter-spacing: -0.025em; margin: 12px 0 10px 0;">
-                Solusi Terintegrasi Penyelamatan Pangan
+            <h2 style="font-size: 2.1rem; font-weight: 850; color: #ffffff; letter-spacing: -0.025em; margin: 14px 0 14px 0; line-height: 1.3;">
+                Dua Masalah Nyata yang Bisa Kita Selesaikan Bersama
             </h2>
-            <p style="color: #94a3b8; font-size: 0.98rem; line-height: 1.6; margin: 0;">
-                Layanan menyeluruh yang dirancang untuk mempertemukan restoran &amp; bakery berintegritas tinggi dengan pembeli yang bijak dan berhemat.
+            <p style="color: #94a3b8; font-size: 1.02rem; line-height: 1.65; margin: 0;">
+                Bukan karena makanannya tidak enak. Setiap hari menjelang tutup, pemilik usaha makanan di sekitar kita sering menghadapi surplus porsi. Di waktu yang sama, banyak teman kita yang harus berhitung ketat untuk sekadar makan malam layak.
             </p>
         </div>
 
-        <div class="services-grid-cinematic">
-            <!-- Service Card 1 -->
-            <div class="service-card-cinematic">
-                <div class="service-card-header">
-                    <div class="service-icon-wrap emerald">
-                        <i class="fa-solid fa-bowl-food"></i>
-                    </div>
-                    <span class="service-tag">Penyelamat Pangan</span>
-                </div>
-                <div class="service-card-content">
-                    <h3 class="service-title">Closing Deals Makanan Berkualitas</h3>
-                    <p class="service-desc">
-                        Akses menu segar harian dari resto, cafe, dan bakery ternama dengan potongan harga hingga 80% atau gratis subsidi rantau. Makanan dipastikan 100% layak konsumsi dan higienis.
-                    </p>
-                </div>
-                <div class="service-card-footer">
-                    <a href="#features" class="service-action-link">
-                        <span>Jelajah Menu Promo</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Service Card 2 -->
-            <div class="service-card-cinematic">
-                <div class="service-card-header">
-                    <div class="service-icon-wrap amber">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 32px;">
+            <!-- Sisi Pemilik Usaha -->
+            <div style="background: #0f1420; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 32px; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(245, 158, 11, 0.15); color: #f59e0b; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 20px;">
                         <i class="fa-solid fa-store"></i>
                     </div>
-                    <span class="service-tag">Mitra Toko &amp; UMKM</span>
-                </div>
-                <div class="service-card-content">
-                    <h3 class="service-title">Kemitraan Zero Food Waste</h3>
-                    <p class="service-desc">
-                        Bantu pemilik bisnis F&amp;B memonetisasi surplus batch masak hari ini yang belum habis saat jam tutup. Hindari kerugian modal, kurangi limbah pangan, dan ciptakan dampak sosial nyata.
+                    <span style="font-size: 0.8rem; font-weight: 750; color: #f59e0b; text-transform: uppercase; letter-spacing: 0.05em;">Untuk Pemilik Resto &amp; Bakery</span>
+                    <h3 style="font-size: 1.35rem; font-weight: 800; color: #ffffff; margin: 8px 0 12px 0;">
+                        Tutup toko dengan tenang, tanpa rasa bersalah membuang makanan.
+                    </h3>
+                    <p style="color: #94a3b8; font-size: 0.94rem; line-height: 1.65; margin: 0;">
+                        Daripada rugi biaya bahan baku dan menumpuk limbah makanan, cukup buka website, masukkan jumlah porsi yang belum terjual, dan beri harga promo spesial. Dapurmu tetap bersih, modal tertutup, dan makananmu dinikmati orang yang tepat.
                     </p>
                 </div>
-                <div class="service-card-footer">
-                    <a href="<?= BASE_URL ?>?url=auth/register" class="service-action-link">
-                        <span>Daftar Kemitraan Toko</span>
-                        <i class="fa-solid fa-arrow-right"></i>
+                <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.06);">
+                    <a href="<?= BASE_URL ?>?url=auth/register" style="font-size: 0.9rem; font-weight: 700; color: #f59e0b; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                        Daftarkan Usaha Anda Gratis <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
 
-            <!-- Service Card 3 -->
-            <div class="service-card-cinematic">
-                <div class="service-card-header">
-                    <div class="service-icon-wrap blue">
-                        <i class="fa-solid fa-shield-halved"></i>
+            <!-- Sisi Pembeli & Anak Rantau -->
+            <div style="background: #0f1420; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 32px; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(16, 185, 129, 0.15); color: #10b981; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 20px;">
+                        <i class="fa-solid fa-utensils"></i>
                     </div>
-                    <span class="service-tag">Sistem Terverifikasi</span>
-                </div>
-                <div class="service-card-content">
-                    <h3 class="service-title">Tebus Kasir Aman &amp; Bermartabat</h3>
-                    <p class="service-desc">
-                        Sistem pemesanan dilengkapi kode klaim digital resmi. Tunjukkan kode tebus langsung ke kasir toko tanpa rasa canggung, tanpa antrean rumit, dengan jaminan stok teralokasi.
+                    <span style="font-size: 0.8rem; font-weight: 750; color: #10b981; text-transform: uppercase; letter-spacing: 0.05em;">Untuk Anak Kos &amp; Pekerja Harian</span>
+                    <h3 style="font-size: 1.35rem; font-weight: 800; color: #ffffff; margin: 8px 0 12px 0;">
+                        Makan malam enak dan bergizi, tanpa bikin kantong kempes.
+                    </h3>
+                    <p style="color: #94a3b8; font-size: 0.94rem; line-height: 1.65; margin: 0;">
+                        Kamu bisa beli makanan berkualitas dari resto dan toko roti favoritmu dengan potongan harga hingga 80%—bahkan gratis untuk porsi peduli pangan. Tinggal pesan lewat web, lalu ambil sendiri ke kasir toko sebelum mereka tutup.
                     </p>
                 </div>
-                <div class="service-card-footer">
-                    <a href="#our-work" class="service-action-link">
-                        <span>Pelajari Alur &amp; Mutu</span>
-                        <i class="fa-solid fa-arrow-right"></i>
+                <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.06);">
+                    <a href="<?= BASE_URL ?>?url=donation/catalog" style="font-size: 0.9rem; font-weight: 700; color: #10b981; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                        Buka Katalog Menu Tersedia <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
         </div>
-    </section>
-</div>
+    </div>
+</section>
 
-<!-- Section Karya & Misi Gerakan Kami (#our-work & #tentang-gerakan) -->
-<div class="container" id="our-work" style="padding-top: 16px; padding-bottom: 72px;">
-    <span id="tentang-gerakan" style="display:block; position:relative; top:-90px; visibility:hidden;"></span>
-    <section class="mission-section-cinematic" style="margin-top: 0;">
-        <div class="mission-grid">
-            <div class="mission-text">
-                <span class="mission-badge">Our Work &amp; Gerakan Nyata</span>
-                <h2 class="mission-title">
-                    Bukan Makanan Sisa.<br>Ini Pilihan Cerdas &amp; Bermartabat.
-                </h2>
-                <p class="mission-desc">
-                    Setiap hari ribuan porsi makanan lezat dan bergizi terpaksa dibuang oleh bakery dan restoran hanya karena jam operasional toko berakhir. Di sisi lain, mahasiswa perantauan dan pekerja harian berjuang berhemat untuk makan sehari-hari.
+<!-- 4. Cara Kerja Sederhana (#cara-kerja) -->
+<section id="cara-kerja" style="padding-top: 56px; padding-bottom: 64px; background: rgba(255, 255, 255, 0.015); border-top: 1px solid rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+    <div class="container">
+        <div style="text-align: center; max-width: 680px; margin: 0 auto 48px auto;">
+            <span class="mission-badge" style="background: rgba(59, 130, 246, 0.12); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.25);">
+                <i class="fa-solid fa-list-check"></i> Alur Pemesanan
+            </span>
+            <h2 style="font-size: 2.1rem; font-weight: 850; color: #ffffff; letter-spacing: -0.025em; margin: 14px 0 12px 0;">
+                Tiga Langkah Praktis Sebelum Toko Tutup
+            </h2>
+            <p style="color: #94a3b8; font-size: 1rem; line-height: 1.6; margin: 0;">
+                Tanpa perantara, tanpa antrean panjang. Semua proses dilakukan langsung antara kamu dan kasir toko.
+            </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+            <!-- Langkah 1 -->
+            <div style="background: #0d121c; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 18px; padding: 28px; position: relative;">
+                <div style="font-size: 2.4rem; font-weight: 900; color: rgba(255, 255, 255, 0.08); position: absolute; top: 20px; right: 24px;">01</div>
+                <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16, 185, 129, 0.15); color: #10b981; display: flex; align-items: center; justify-content: center; font-size: 1.15rem; margin-bottom: 18px;">
+                    <i class="fa-solid fa-store"></i>
+                </div>
+                <h4 style="font-size: 1.15rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">Toko Pasang Menu Jelang Tutup</h4>
+                <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                    Menjelang sore atau malam hari (sekitar pukul 17.00 - 21.00 WIB), toko memasukkan sisa porsi segar di etalase yang belum terjual dengan potongan harga besar atau gratis.
                 </p>
-                <div class="mission-checklist">
-                    <div class="check-item">
-                        <i class="fa-solid fa-circle-check"></i>
-                        <div>
-                            <strong>100% Batch Masak Hari Ini</strong>
-                            <span>Higienis dan disimpan dalam etalase bersih sebelum toko tutup.</span>
+            </div>
+
+            <!-- Langkah 2 -->
+            <div style="background: #0d121c; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 18px; padding: 28px; position: relative;">
+                <div style="font-size: 2.4rem; font-weight: 900; color: rgba(255, 255, 255, 0.08); position: absolute; top: 20px; right: 24px;">02</div>
+                <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(59, 130, 246, 0.15); color: #60a5fa; display: flex; align-items: center; justify-content: center; font-size: 1.15rem; margin-bottom: 18px;">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                </div>
+                <h4 style="font-size: 1.15rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">Kamu Pesan Lewat Web</h4>
+                <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                    Buka katalog, pilih makanan di lokasi terdekatmu, dan tentukan berapa porsi yang ingin ditebus. Setelah toko mengonfirmasi, kamu akan menerima kode ambil kasir.
+                </p>
+            </div>
+
+            <!-- Langkah 3 -->
+            <div style="background: #0d121c; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 18px; padding: 28px; position: relative;">
+                <div style="font-size: 2.4rem; font-weight: 900; color: rgba(255, 255, 255, 0.08); position: absolute; top: 20px; right: 24px;">03</div>
+                <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(245, 158, 11, 0.15); color: #f59e0b; display: flex; align-items: center; justify-content: center; font-size: 1.15rem; margin-bottom: 18px;">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                </div>
+                <h4 style="font-size: 1.15rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">Tebus Langsung di Kasir</h4>
+                <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                    Datang ke toko sebelum jam operasional tutup. Sebutkan kode ambil ke kasir, bayar sesuai nominal hemat (atau Rp 0 untuk menu peduli), dan nikmati makanan hangatmu.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 5. Jaminan Kelayakan & Kualitas (#kualitas) -->
+<section id="kualitas" style="padding-top: 64px; padding-bottom: 56px;">
+    <div class="container">
+        <div style="background: linear-gradient(135deg, #0e1523 0%, #0a0e17 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 40px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 36px; align-items: center;">
+                <div>
+                    <span class="mission-badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); margin-bottom: 12px;">
+                        <i class="fa-solid fa-shield-halved"></i> Jaminan Mutu
+                    </span>
+                    <h2 style="font-size: 1.95rem; font-weight: 850; color: #ffffff; letter-spacing: -0.025em; line-height: 1.3; margin: 10px 0 14px 0;">
+                        Bukan Makanan Sisa.<br>Ini Porsi Segar Produksi Hari Ini.
+                    </h2>
+                    <p style="color: #94a3b8; font-size: 0.98rem; line-height: 1.65; margin: 0 0 20px 0;">
+                        Masih banyak yang salah paham mengira makanan closing deals adalah sisa santapan di meja. Di Berbagi Rasa, standarnya sangat jelas:
+                    </p>
+
+                    <div style="display: flex; flex-direction: column; gap: 14px;">
+                        <div style="display: flex; align-items: flex-start; gap: 12px;">
+                            <i class="fa-solid fa-circle-check" style="color: #10b981; font-size: 1.1rem; margin-top: 3px;"></i>
+                            <div>
+                                <strong style="color: #ffffff; font-size: 0.95rem; display: block;">100% Porsi Utuh dari Etalase</strong>
+                                <span style="color: #94a3b8; font-size: 0.88rem;">Makanan dimasak atau dipanggang pada hari yang sama, bukan makanan bekas orang lain.</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="check-item">
-                        <i class="fa-solid fa-circle-check"></i>
-                        <div>
-                            <strong>Penebusan Langsung di Kasir</strong>
-                            <span>Dapatkan kode ambil resmi di aplikasi dan ambil pesanan Anda secara profesional.</span>
+
+                        <div style="display: flex; align-items: flex-start; gap: 12px;">
+                            <i class="fa-solid fa-circle-check" style="color: #10b981; font-size: 1.1rem; margin-top: 3px;"></i>
+                            <div>
+                                <strong style="color: #ffffff; font-size: 0.95rem; display: block;">Kemasan Bersih &amp; Higienis</strong>
+                                <span style="color: #94a3b8; font-size: 0.88rem;">Dikemas layak dengan standar kebersihan masing-masing toko mitra.</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="check-item">
-                        <i class="fa-solid fa-circle-check"></i>
-                        <div>
-                            <strong>Saling Menguntungkan (Win-Win)</strong>
-                            <span>Toko tidak rugi bahan baku, anak rantau makan kenyang dan bergizi.</span>
+
+                        <div style="display: flex; align-items: flex-start; gap: 12px;">
+                            <i class="fa-solid fa-circle-check" style="color: #10b981; font-size: 1.1rem; margin-top: 3px;"></i>
+                            <div>
+                                <strong style="color: #ffffff; font-size: 0.95rem; display: block;">Bermartabat Tanpa Rasa Canggung</strong>
+                                <span style="color: #94a3b8; font-size: 0.88rem;">Kamu adalah penyelamat pangan. Mengambil makanan hemat adalah tindakan bijak dan patut dibanggakan.</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Callout Box Ajak Mulai -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 18px; padding: 28px; text-align: center;">
+                    <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); color: #10b981; display: inline-flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 16px;">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <h3 style="font-size: 1.25rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">
+                        Ingin Tahu Menu yang Tersedia Malam Ini?
+                    </h3>
+                    <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin-bottom: 22px;">
+                        Buka katalog sekarang untuk melihat toko mana saja di sekitarmu yang sedang membuka tebusan promo jelang tutup.
+                    </p>
+                    <a href="<?= BASE_URL ?>?url=donation/catalog" class="btn-shopify-white" style="width: 100%; justify-content: center; padding: 14px 20px;">
+                        Buka Katalog Makanan Siap Tebus
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 6. Pertanyaan yang Sering Muncul (FAQ Singkat & Jujur) -->
+<section style="padding-top: 48px; padding-bottom: 64px;">
+    <div class="container">
+        <div style="text-align: center; max-width: 640px; margin: 0 auto 36px auto;">
+            <h2 style="font-size: 1.85rem; font-weight: 850; color: #ffffff; letter-spacing: -0.02em;">
+                Pertanyaan yang Sering Ditanyakan
+            </h2>
+            <p style="color: #94a3b8; font-size: 0.96rem; margin-top: 8px;">
+                Semua yang perlu kamu ketahui sebelum memesan atau bergabung.
+            </p>
+        </div>
+
+        <div style="max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px;">
+            <div style="background: #0f1420; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 22px 24px;">
+                <h4 style="font-size: 1.05rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">
+                    Kapan waktu terbaik untuk mengecek menu di Berbagi Rasa?
+                </h4>
+                <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.65; margin: 0;">
+                    Umumnya antara pukul 17.00 hingga 21.30 WIB. Di jam-jam inilah sebagian besar resto, bakery, dan kafe mulai menghitung sisa porsi yang belum terjual dan memasang penawaran closing deals di website.
+                </p>
             </div>
 
-            <div class="mission-card-callout">
-                <div class="callout-inner">
-                    <div class="callout-icon">
-                        <i class="fa-solid fa-store"></i>
-                    </div>
-                    <h3>Punya Toko atau Rumah Makan?</h3>
-                    <p>
-                        Ubah surplus makanan sebelum tutup toko menjadi rezeki tambahan dan berkah untuk anak rantau di sekitar Anda.
-                    </p>
+            <div style="background: #0f1420; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 22px 24px;">
+                <h4 style="font-size: 1.05rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">
+                    Siapa saja yang boleh memesan menu di sini?
+                </h4>
+                <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.65; margin: 0;">
+                    Siapa saja boleh memesan menu promo diskon toko. Semakin banyak makanan yang dibeli, semakin sedikit makanan yang terbuang. Khusus menu gratis peduli (Rp 0), kami memohon kebijaksanaan pengguna agar diprioritaskan bagi teman perantau, mahasiswa berbekal pas-pasan, atau saudara kita yang benar-benar membutuhkan makan malam hari ini.
+                </p>
+            </div>
+
+            <div style="background: #0f1420; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 22px 24px;">
+                <h4 style="font-size: 1.05rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">
+                    Apakah ada biaya admin atau biaya langganan?
+                </h4>
+                <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.65; margin: 0;">
+                    Tidak ada sama sekali. Penggunaan platform Berbagi Rasa 100% gratis, baik untuk pembeli maupun untuk pemilik toko yang ingin mendaftar.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 7. Call To Action Mitra Toko (#mitra) -->
+<section id="mitra" style="padding-top: 32px; padding-bottom: 72px;">
+    <div class="container">
+        <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 24px; padding: 48px 32px; text-align: center;">
+            <div style="max-width: 620px; margin: 0 auto;">
+                <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(245, 158, 11, 0.2); color: #f59e0b; display: inline-flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 20px;">
+                    <i class="fa-solid fa-store"></i>
+                </div>
+                <h2 style="font-size: 2rem; font-weight: 850; color: #ffffff; letter-spacing: -0.025em; line-height: 1.3; margin-bottom: 12px;">
+                    Punya Usaha Makanan atau Toko Roti?
+                </h2>
+                <p style="color: #94a3b8; font-size: 1rem; line-height: 1.65; margin-bottom: 28px;">
+                    Mari berkolaborasi. Daftarkan usaha kulinermu sekarang dan mulai pasang porsi surplus sebelum toko tutup. Kurangi kerugian, jaga lingkungan, dan hadirkan makan malam bermakna bagi warga sekitar.
+                </p>
+
+                <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
                     <?php if (!isLoggedIn()): ?>
-                        <a href="<?= BASE_URL ?>?url=auth/register" class="btn-pill-primary btn-block">
-                            Daftarkan Toko Anda Gratis
+                        <a href="<?= BASE_URL ?>?url=auth/register" class="btn-shopify-white" style="padding: 13px 26px;">
+                            <i class="fa-solid fa-circle-plus"></i> Daftarkan Toko Anda Gratis
+                        </a>
+                        <a href="<?= BASE_URL ?>?url=donation/catalog" class="btn-shopify-pill-ghost" style="padding: 13px 24px;">
+                            Buka Katalog Menu
                         </a>
                     <?php elseif (($_SESSION['role'] ?? '') === 'donatur'): ?>
-                        <a href="<?= BASE_URL ?>?url=donation/create" class="btn-pill-primary btn-block">
-                            + Pasang Menu Promo Malam Ini
+                        <a href="<?= BASE_URL ?>?url=donation/create" class="btn-shopify-white" style="padding: 13px 26px;">
+                            <i class="fa-solid fa-plus"></i> + Pasang Menu Promo Malam Ini
+                        </a>
+                        <a href="<?= BASE_URL ?>?url=donation/mine" class="btn-shopify-pill-ghost" style="padding: 13px 24px;">
+                            Buka Etalase Toko
+                        </a>
+                    <?php else: ?>
+                        <a href="<?= BASE_URL ?>?url=donation/catalog" class="btn-shopify-white" style="padding: 13px 26px;">
+                            <i class="fa-solid fa-bowl-food"></i> Buka Katalog Makanan
                         </a>
                     <?php endif; ?>
                 </div>
             </div>
         </div>
-    </section>
-</div>
+    </div>
+</section>

@@ -133,23 +133,28 @@ $isActorPage = (
                         <!-- Public Landing Navigation -->
                         <ul class="nav-links desktop-nav-links">
                             <li>
-                                <a href="<?= $isHomePage ? '#home' : BASE_URL . '?url=donation/index' ?>" class="nav-link <?= ($isHomePage && empty($_GET['harga']) && empty($_GET['q']) && empty($_GET['lokasi'])) ? 'active' : '' ?>">
+                                <a href="<?= BASE_URL ?>?url=donation/index" class="nav-link <?= ($isHomePage) ? 'active' : '' ?>">
                                     Beranda
                                 </a>
                             </li>
                             <li>
-                                <a href="<?= $isHomePage ? '#features' : BASE_URL . '?url=donation/index#features' ?>" class="nav-link <?= (!empty($_GET['harga']) || !empty($_GET['q']) || !empty($_GET['lokasi'])) ? 'active' : '' ?>">
-                                    Fitur &amp; Katalog
+                                <a href="<?= BASE_URL ?>?url=donation/catalog" class="nav-link <?= ($currentUrl === 'donation/catalog') ? 'active' : '' ?>">
+                                    <i class="fa-solid fa-utensils" style="color: #10b981;"></i> Katalog Makanan
                                 </a>
                             </li>
                             <li>
-                                <a href="<?= $isHomePage ? '#service' : BASE_URL . '?url=donation/index#service' ?>" class="nav-link">
-                                    Layanan
+                                <a href="<?= $isHomePage ? '#tentang' : BASE_URL . '?url=donation/index#tentang' ?>" class="nav-link">
+                                    Kenapa Berbagi Rasa?
                                 </a>
                             </li>
                             <li>
-                                <a href="<?= $isHomePage ? '#our-work' : BASE_URL . '?url=donation/index#our-work' ?>" class="nav-link">
-                                    Karya &amp; Gerakan
+                                <a href="<?= $isHomePage ? '#cara-kerja' : BASE_URL . '?url=donation/index#cara-kerja' ?>" class="nav-link">
+                                    Cara Kerja
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= $isHomePage ? '#mitra' : BASE_URL . '?url=donation/index#mitra' ?>" class="nav-link">
+                                    Untuk Pemilik Usaha
                                 </a>
                             </li>
                         </ul>
@@ -161,9 +166,9 @@ $isActorPage = (
                     <div class="nav-actions desktop-nav-actions">
                         <?php if ($currentUser): ?>
                             <?php if ($isActorPage): ?>
-                                <a href="<?= BASE_URL ?>?url=donation/index" class="btn-portal-public-web" title="Lihat Website & Katalog Publik">
-                                    <i class="fa-solid fa-globe"></i>
-                                    <span class="btn-portal-text">Katalog Publik</span>
+                                <a href="<?= BASE_URL ?>?url=donation/catalog" class="btn-portal-public-web" title="Lihat Website & Katalog Publik">
+                                    <i class="fa-solid fa-utensils"></i>
+                                    <span class="btn-portal-text">Katalog Makanan</span>
                                 </a>
                             <?php else: ?>
                                 <?php if ($userRole === 'donatur'): ?>
@@ -357,9 +362,9 @@ $isActorPage = (
                     </div>
                     <ul class="drawer-nav-list">
                         <li>
-                            <a href="<?= BASE_URL ?>?url=donation/index" class="drawer-link">
-                                <span class="drawer-icon-wrap"><i class="fa-solid fa-globe"></i></span>
-                                <span class="drawer-label">Katalog Makanan Publik</span>
+                            <a href="<?= BASE_URL ?>?url=donation/catalog" class="drawer-link">
+                                <span class="drawer-icon-wrap"><i class="fa-solid fa-utensils"></i></span>
+                                <span class="drawer-label">Katalog Makanan Siap Tebus</span>
                             </a>
                         </li>
                     </ul>
@@ -367,27 +372,33 @@ $isActorPage = (
                 <?php else: ?>
                     <ul class="drawer-nav-list">
                         <li>
-                            <a href="<?= $isHomePage ? '#home' : BASE_URL . '?url=donation/index' ?>" class="drawer-link <?= ($isHomePage && empty($_GET['harga']) && empty($_GET['q']) && empty($_GET['lokasi'])) ? 'active' : '' ?>">
+                            <a href="<?= BASE_URL ?>?url=donation/index" class="drawer-link <?= ($isHomePage) ? 'active' : '' ?>">
                                 <span class="drawer-icon-wrap"><i class="fa-solid fa-house"></i></span>
                                 <span class="drawer-label">Beranda</span>
                             </a>
                         </li>
                         <li>
-                            <a href="<?= $isHomePage ? '#features' : BASE_URL . '?url=donation/index#features' ?>" class="drawer-link <?= (!empty($_GET['harga']) || !empty($_GET['q']) || !empty($_GET['lokasi'])) ? 'active' : '' ?>">
-                                <span class="drawer-icon-wrap"><i class="fa-solid fa-bowl-food"></i></span>
-                                <span class="drawer-label">Fitur &amp; Katalog</span>
+                            <a href="<?= BASE_URL ?>?url=donation/catalog" class="drawer-link <?= ($currentUrl === 'donation/catalog') ? 'active' : '' ?>">
+                                <span class="drawer-icon-wrap" style="color: #10b981;"><i class="fa-solid fa-utensils"></i></span>
+                                <span class="drawer-label">Katalog Makanan Siap Tebus</span>
                             </a>
                         </li>
                         <li>
-                            <a href="<?= $isHomePage ? '#service' : BASE_URL . '?url=donation/index#service' ?>" class="drawer-link">
-                                <span class="drawer-icon-wrap"><i class="fa-solid fa-hand-holding-heart"></i></span>
-                                <span class="drawer-label">Layanan</span>
+                            <a href="<?= $isHomePage ? '#tentang' : BASE_URL . '?url=donation/index#tentang' ?>" class="drawer-link">
+                                <span class="drawer-icon-wrap"><i class="fa-solid fa-heart"></i></span>
+                                <span class="drawer-label">Kenapa Berbagi Rasa?</span>
                             </a>
                         </li>
                         <li>
-                            <a href="<?= $isHomePage ? '#our-work' : BASE_URL . '?url=donation/index#our-work' ?>" class="drawer-link">
-                                <span class="drawer-icon-wrap"><i class="fa-solid fa-route"></i></span>
-                                <span class="drawer-label">Karya &amp; Gerakan</span>
+                            <a href="<?= $isHomePage ? '#cara-kerja' : BASE_URL . '?url=donation/index#cara-kerja' ?>" class="drawer-link">
+                                <span class="drawer-icon-wrap"><i class="fa-solid fa-list-check"></i></span>
+                                <span class="drawer-label">Cara Kerja</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= $isHomePage ? '#mitra' : BASE_URL . '?url=donation/index#mitra' ?>" class="drawer-link">
+                                <span class="drawer-icon-wrap"><i class="fa-solid fa-store"></i></span>
+                                <span class="drawer-label">Untuk Pemilik Usaha</span>
                             </a>
                         </li>
                     </ul>

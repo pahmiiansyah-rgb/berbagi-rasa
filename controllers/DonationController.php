@@ -15,9 +15,27 @@ class DonationController {
     }
 
     /**
-     * Halaman Utama / Katalog Makanan Hemat Publik
+     * Halaman Utama / Landing Page Pengenalan Gerakan Berbagi Rasa
      */
     public function index(): void {
+        // Jika ada filter atau pencarian dari luar, arahkan ke katalog
+        if (!empty($_GET['q']) || !empty($_GET['lokasi']) || !empty($_GET['harga']) || !empty($_GET['kategori'])) {
+            $this->catalog();
+            return;
+        }
+
+        $stats = $this->donationModel->getStats();
+
+        view('donations/index', [
+            'pageTitle' => 'Berbagi Rasa — Makanan Enak Ramah Kantong Sebelum Toko Tutup',
+            'stats'     => $stats,
+        ]);
+    }
+
+    /**
+     * Halaman Katalog Makanan Siap Tebus
+     */
+    public function catalog(): void {
         $keyword     = trim($_GET['q'] ?? '');
         $lokasi      = trim($_GET['lokasi'] ?? '');
         $kategori    = trim($_GET['kategori'] ?? '');
@@ -32,8 +50,8 @@ class DonationController {
         $locations  = $this->donationModel->distinctLocations();
         $stats      = $this->donationModel->getStats();
 
-        view('donations/index', [
-            'pageTitle'   => 'Katalog Makanan Berkualitas Murah Jelang Tutup Toko - Berbagi Rasa',
+        view('donations/catalog', [
+            'pageTitle'   => 'Katalog Menu Siap Tebus Jelang Tutup Toko - Berbagi Rasa',
             'donations'   => $donations,
             'keyword'     => $keyword,
             'lokasi'      => $lokasi,
