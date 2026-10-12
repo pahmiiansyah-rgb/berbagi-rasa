@@ -6,13 +6,23 @@
 // Set Zona Waktu Indonesia Barat (WIB)
 date_default_timezone_set('Asia/Jakarta');
 
-// Menentukan protokol (http / https)
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || ($_SERVER['SERVER_PORT'] ?? 80) == 443) ? 'https://' : 'http://';
-$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-$scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? ''));
-$basePath = ($scriptDir === '/' || $scriptDir === '\\') ? '' : rtrim($scriptDir, '/');
+// Menentukan protokol (http / https) - mendukung reverse proxy Vercel & HTTPS cloud
+$isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+    || (isset($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443)
+    || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
 
-// Base URL fleksibel mengikuti domain/vhost atau subfolder Laragon
+$protocol = $isHttps ? 'https://' : 'http://';
+$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+
+// Deteksi direktori base path, menetralkan awalan '/api' jika di Vercel Serverless
+$scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? ''));
+if ($scriptDir === '/' || $scriptDir === '\\' || $scriptDir === '.' || $scriptDir === '/api') {
+    $basePath = '';
+} else {
+    $basePath = rtrim($scriptDir, '/');
+}
+
+// Base URL fleksibel mengikuti domain/vhost, Vercel Serverless, atau subfolder Laragon
 defined('BASE_URL') or define('BASE_URL', $protocol . $host . $basePath . '/index.php');
 defined('APP_URL') or define('APP_URL', $protocol . $host . $basePath);
 defined('ASSET_URL') or define('ASSET_URL', $basePath);

@@ -3,9 +3,15 @@
  * Pintu Masuk Tunggal & Router Aplikasi - Berbagi Rasa
  */
 
-// Memulai sesi PHP jika belum aktif
+// Memulai sesi PHP jika belum aktif (ramah lingkungan serverless seperti Vercel)
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+    if (getenv('VERCEL') || !is_writable(session_save_path())) {
+        $tmpSession = sys_get_temp_dir();
+        if (is_writable($tmpSession)) {
+            @session_save_path($tmpSession);
+        }
+    }
+    @session_start();
 }
 
 // Muat Konfigurasi & Utilitas Sistem
@@ -27,8 +33,19 @@ require_once __DIR__ . '/controllers/DonationController.php';
 require_once __DIR__ . '/controllers/RequestController.php';
 require_once __DIR__ . '/controllers/HistoryController.php';
 
-// Parsing URL parameter (format: ?url=controller/method/param1/param2...)
-$rawUrl = $_GET['url'] ?? 'donation/index';
+// Parsing URL parameter (format: ?url=controller/method/param1/param2... atau via request path)
+$rawUrl = $_GET['url'] ?? '';
+if (empty($rawUrl)) {
+    $uriPath = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH);
+    $uriPath = trim($uriPath, '/');
+    $uriPath = preg_replace('#^(api/)?index\.php/?#', '', $uriPath);
+    if (!empty($basePath)) {
+        $cleanBase = trim($basePath, '/');
+        $uriPath = preg_replace('#^' . preg_quote($cleanBase, '#') . '/?#', '', $uriPath);
+    }
+    $rawUrl = !empty($uriPath) ? $uriPath : 'donation/index';
+}
+
 $rawUrl = trim($rawUrl, '/');
 $segments = explode('/', $rawUrl);
 

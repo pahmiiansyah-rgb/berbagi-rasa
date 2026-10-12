@@ -11,6 +11,74 @@ $db = Database::get();
 
 echo "Memperbarui skema dan mengisi data demo Berbagi Rasa (Closing Food Rescue Deals)...\n";
 
+// 0. Pastikan seluruh tabel dasar telah dibuat
+$db->exec("
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('donatur', 'penerima', 'admin') NOT NULL DEFAULT 'penerima',
+    telepon VARCHAR(20) NULL,
+    alamat TEXT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS donations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    judul VARCHAR(150) NOT NULL,
+    deskripsi TEXT NULL,
+    jumlah INT NOT NULL,
+    sisa INT NOT NULL,
+    satuan VARCHAR(20) NOT NULL DEFAULT 'porsi',
+    lokasi_ambil VARCHAR(255) NOT NULL,
+    foto VARCHAR(255) NULL,
+    status ENUM('tersedia', 'dipesan', 'selesai', 'kedaluwarsa', 'dibatalkan') NOT NULL DEFAULT 'tersedia',
+    expired_at DATETIME NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS requests (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    donation_id INT NOT NULL,
+    penerima_id INT NOT NULL,
+    jumlah_minta INT NOT NULL,
+    catatan VARCHAR(255) NULL,
+    claim_token VARCHAR(50) NULL,
+    status ENUM('menunggu', 'disetujui', 'ditolak', 'dibatalkan', 'diambil') NOT NULL DEFAULT 'menunggu',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (donation_id) REFERENCES donations(id) ON DELETE CASCADE,
+    FOREIGN KEY (penerima_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS status_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    request_id INT NULL,
+    donation_id INT NOT NULL,
+    dari_status VARCHAR(50) NULL,
+    ke_status VARCHAR(50) NOT NULL,
+    diubah_oleh INT NULL,
+    catatan VARCHAR(255) NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (donation_id) REFERENCES donations(id) ON DELETE CASCADE,
+    FOREIGN KEY (request_id) REFERENCES requests(id) ON DELETE SET NULL,
+    FOREIGN KEY (diubah_oleh) REFERENCES users(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS reviews (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    request_id INT NOT NULL,
+    rating TINYINT NOT NULL DEFAULT 5,
+    ulasan TEXT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (request_id) REFERENCES requests(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+");
+
 // 1. Pastikan kolom baru tersedia di tabel donations
 $existingCols = $db->query("DESCRIBE donations")->fetchAll(PDO::FETCH_COLUMN);
 
