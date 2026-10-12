@@ -133,7 +133,11 @@ class RequestController {
             $this->db->beginTransaction();
 
             // Kunci baris donasi agar tidak terjadi race condition / minus stock
-            $lockStmt = $this->db->prepare('SELECT id, sisa, status, expired_at, satuan FROM donations WHERE id = :id FOR UPDATE');
+            $lockSql = 'SELECT id, sisa, status, expired_at, satuan FROM donations WHERE id = :id';
+            if ($this->db->getAttribute(PDO::ATTR_DRIVER_NAME) === 'mysql') {
+                $lockSql .= ' FOR UPDATE';
+            }
+            $lockStmt = $this->db->prepare($lockSql);
             $lockStmt->execute([':id' => $request['donation_id']]);
             $lockedDonation = $lockStmt->fetch();
 
