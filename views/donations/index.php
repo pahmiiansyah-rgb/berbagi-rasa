@@ -140,8 +140,93 @@
     </div>
 </section>
 
-<!-- 4. Cara Kerja Sederhana (#cara-kerja) -->
-<section id="cara-kerja" style="padding-top: 56px; padding-bottom: 64px; background: rgba(255, 255, 255, 0.015); border-top: 1px solid rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+<!-- 4. Fitur Penting Platform (#fitur) -->
+<section id="fitur" style="padding-top: 56px; padding-bottom: 64px; background: rgba(255, 255, 255, 0.015); border-top: 1px solid rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+    <div class="container">
+        <div style="text-align: center; max-width: 680px; margin: 0 auto 48px auto;">
+            <span class="mission-badge" style="background: rgba(16, 185, 129, 0.12); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.25);">
+                <i class="fa-solid fa-sparkles"></i> Kemudahan untuk Semua
+            </span>
+            <h2 style="font-size: 2.1rem; font-weight: 850; color: #ffffff; letter-spacing: -0.025em; margin: 14px 0 12px 0;">
+                Fitur Penting di Berbagi Rasa
+            </h2>
+            <p style="color: #94a3b8; font-size: 1rem; line-height: 1.6; margin: 0;">
+                Dirancang sederhana agar siapa saja bisa langsung menggunakan tanpa ribet, baik untuk pembeli maupun pemilik usaha.
+            </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+            <!-- Fitur 1: Closing Deals -->
+            <div style="background: #0d121c; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 12px;">
+                <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(245, 158, 11, 0.15); color: #f59e0b; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                    <i class="fa-solid fa-tags"></i>
+                </div>
+                <h4 style="font-size: 1.12rem; font-weight: 800; color: #ffffff; margin: 0;">Diskon Closing Deals 50% – 80%</h4>
+                <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                    Beli menu lezat dari bakery, kafe, dan resto langganan dengan harga miring menjelang jam operasional toko berakhir.
+                </p>
+            </div>
+
+            <!-- Fitur 2: Gratis Peduli Rantau -->
+            <div style="background: #0d121c; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 12px;">
+                <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16, 185, 129, 0.15); color: #10b981; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+                </div>
+                <h4 style="font-size: 1.12rem; font-weight: 800; color: #ffffff; margin: 0;">Porsi Gratis Peduli (Rp 0)</h4>
+                <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                    Khusus teman perantau, anak kos berbekal pas-pasan, atau siapa pun yang sedang kesulitan makan malam hari ini.
+                </p>
+            </div>
+
+            <!-- Fitur 3: Kode Ambil Cepat -->
+            <div style="background: #0d121c; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 12px;">
+                <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(59, 130, 246, 0.15); color: #60a5fa; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                    <i class="fa-solid fa-ticket"></i>
+                </div>
+                <h4 style="font-size: 1.12rem; font-weight: 800; color: #ffffff; margin: 0;">Kode Ambil Kasir Instan</h4>
+                <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                    Reservasi langsung lewat website dan bawa kode ambil ke kasir toko. Tanpa perantara pihak ketiga dan bebas biaya admin.
+                </p>
+            </div>
+
+            <!-- Fitur 4: Jaminan Batch Segar -->
+            <div style="background: #0d121c; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 12px;">
+                <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(168, 85, 247, 0.15); color: #c084fc; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                    <i class="fa-solid fa-shield-check"></i>
+                </div>
+                <h4 style="font-size: 1.12rem; font-weight: 800; color: #ffffff; margin: 0;">Jaminan Porsi Segar Etalase</h4>
+                <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                    Bukan makanan sisa piring orang lain. Semua menu adalah batch produksi segar hari yang sama dengan standar kebersihan terjaga.
+                </p>
+            </div>
+
+            <!-- Fitur 5: Dashboard Mitra Usaha -->
+            <div style="background: #0d121c; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 12px;">
+                <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(236, 72, 153, 0.15); color: #f472b6; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                    <i class="fa-solid fa-store"></i>
+                </div>
+                <h4 style="font-size: 1.12rem; font-weight: 800; color: #ffffff; margin: 0;">Panel Kelola untuk Pemilik Usaha</h4>
+                <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                    Pasang sisa porsi hanya dalam 1 menit lewat handphone, setujui pesanan masuk, dan pantau biaya modal yang terselamatkan.
+                </p>
+            </div>
+
+            <!-- Fitur 6: Penjemputan Terdekat -->
+            <div style="background: #0d121c; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 12px;">
+                <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(14, 165, 233, 0.15); color: #38bdf8; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                </div>
+                <h4 style="font-size: 1.12rem; font-weight: 800; color: #ffffff; margin: 0;">Saring Menu Berdasarkan Wilayah</h4>
+                <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                    Cari toko atau warung terdekat dari tempat tinggal atau kostmu agar penjemputan sebelum toko tutup semakin praktis.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 5. Cara Kerja Sederhana (#cara-kerja) -->
+<section id="cara-kerja" style="padding-top: 56px; padding-bottom: 64px;">
     <div class="container">
         <div style="text-align: center; max-width: 680px; margin: 0 auto 48px auto;">
             <span class="mission-badge" style="background: rgba(59, 130, 246, 0.12); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.25);">

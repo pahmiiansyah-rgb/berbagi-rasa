@@ -138,18 +138,23 @@ $isActorPage = (
                                 </a>
                             </li>
                             <li>
-                                <a href="<?= BASE_URL ?>?url=donation/catalog" class="nav-link <?= ($currentUrl === 'donation/catalog') ? 'active' : '' ?>">
-                                    <i class="fa-solid fa-utensils" style="color: #10b981;"></i> Katalog Makanan
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?= $isHomePage ? '#tentang' : BASE_URL . '?url=donation/index#tentang' ?>" class="nav-link">
-                                    Kenapa Berbagi Rasa?
+                                <a href="<?= $isHomePage ? '#fitur' : BASE_URL . '?url=donation/index#fitur' ?>" class="nav-link">
+                                    Fitur Penting
                                 </a>
                             </li>
                             <li>
                                 <a href="<?= $isHomePage ? '#cara-kerja' : BASE_URL . '?url=donation/index#cara-kerja' ?>" class="nav-link">
                                     Cara Kerja
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= $isHomePage ? '#tentang' : BASE_URL . '?url=donation/index#tentang' ?>" class="nav-link">
+                                    Cerita Gerakan
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= BASE_URL ?>?url=donation/catalog" class="nav-link <?= ($currentUrl === 'donation/catalog') ? 'active' : '' ?>">
+                                    <i class="fa-solid fa-utensils" style="color: #10b981;"></i> Katalog Makanan
                                 </a>
                             </li>
                             <li>
@@ -378,21 +383,27 @@ $isActorPage = (
                             </a>
                         </li>
                         <li>
-                            <a href="<?= BASE_URL ?>?url=donation/catalog" class="drawer-link <?= ($currentUrl === 'donation/catalog') ? 'active' : '' ?>">
-                                <span class="drawer-icon-wrap" style="color: #10b981;"><i class="fa-solid fa-utensils"></i></span>
-                                <span class="drawer-label">Katalog Makanan Siap Tebus</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= $isHomePage ? '#tentang' : BASE_URL . '?url=donation/index#tentang' ?>" class="drawer-link">
-                                <span class="drawer-icon-wrap"><i class="fa-solid fa-heart"></i></span>
-                                <span class="drawer-label">Kenapa Berbagi Rasa?</span>
+                            <a href="<?= $isHomePage ? '#fitur' : BASE_URL . '?url=donation/index#fitur' ?>" class="drawer-link">
+                                <span class="drawer-icon-wrap" style="color: #f59e0b;"><i class="fa-solid fa-sparkles"></i></span>
+                                <span class="drawer-label">Fitur Penting</span>
                             </a>
                         </li>
                         <li>
                             <a href="<?= $isHomePage ? '#cara-kerja' : BASE_URL . '?url=donation/index#cara-kerja' ?>" class="drawer-link">
                                 <span class="drawer-icon-wrap"><i class="fa-solid fa-list-check"></i></span>
                                 <span class="drawer-label">Cara Kerja</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= $isHomePage ? '#tentang' : BASE_URL . '?url=donation/index#tentang' ?>" class="drawer-link">
+                                <span class="drawer-icon-wrap"><i class="fa-solid fa-heart"></i></span>
+                                <span class="drawer-label">Cerita Gerakan</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= BASE_URL ?>?url=donation/catalog" class="drawer-link <?= ($currentUrl === 'donation/catalog') ? 'active' : '' ?>">
+                                <span class="drawer-icon-wrap" style="color: #10b981;"><i class="fa-solid fa-utensils"></i></span>
+                                <span class="drawer-label">Katalog Makanan Siap Tebus</span>
                             </a>
                         </li>
                         <li>
