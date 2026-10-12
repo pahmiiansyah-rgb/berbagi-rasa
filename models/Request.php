@@ -151,6 +151,25 @@ class ClaimRequest {
     }
 
     /**
+     * Mengambil seluruh pesanan masuk dari semua toko untuk Administrator
+     */
+    public function allForAdmin(): array {
+        $stmt = $this->db->query(
+            "SELECT r.*, 
+                    d.judul AS judul_donasi, d.satuan, d.sisa AS sisa_donasi, d.lokasi_ambil, d.foto AS foto_donasi, d.status AS status_donasi,
+                    d.harga_asli, d.harga_diskon, d.jam_tutup, d.tipe_penawaran,
+                    u.nama AS nama_penerima, u.telepon AS telepon_penerima, u.email AS email_penerima,
+                    u_donatur.nama AS nama_donatur, u_donatur.telepon AS telepon_donatur
+             FROM requests r
+             JOIN donations d ON d.id = r.donation_id
+             JOIN users u ON u.id = r.penerima_id
+             JOIN users u_donatur ON u_donatur.id = d.user_id
+             ORDER BY (r.status = 'menunggu') DESC, r.created_at DESC"
+        );
+        return $stmt->fetchAll();
+    }
+
+    /**
      * Menghitung total pesanan berstatus tertentu untuk suatu menu
      */
     public function countByDonationAndStatus(int $donationId, string $status): int {

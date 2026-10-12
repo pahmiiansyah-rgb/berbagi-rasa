@@ -4,6 +4,7 @@
  * Mobile-First & Responsive Dual Layout (Mobile Cards + Desktop Table)
  */
 $items = $donations ?? $myDonations ?? [];
+$isAdmin = ($isAdmin ?? false) || (($_SESSION['role'] ?? '') === 'admin');
 
 // Hitung Statistik Toko untuk KPI Dashboard
 $totalItems    = count($items);
@@ -14,24 +15,25 @@ $totalSisa     = array_sum(array_column($activeItems, 'sisa'));
 $totalPending  = array_sum(array_column($items, 'pending_requests_count'));
 $totalRequests = array_sum(array_column($items, 'total_requests_count'));
 
-$storeName = currentUser()['nama'] ?? $_SESSION['nama'] ?? 'Mitra Toko';
+$storeName = $isAdmin ? 'Panel Kontrol Administrator' : (currentUser()['nama'] ?? $_SESSION['nama'] ?? 'Mitra Toko');
 ?>
 
 <div class="store-page-wrapper">
     <!-- 1. Header Toko (Mobile-First) -->
     <div class="store-dashboard-header">
         <div class="store-profile-wrap">
-            <div class="store-avatar-box">
-                <i class="fa-solid fa-store"></i>
-                <span class="store-status-dot" title="Toko Buka & Aktif"></span>
+            <div class="store-avatar-box <?= $isAdmin ? 'admin-avatar' : '' ?>" style="<?= $isAdmin ? 'background: linear-gradient(135deg, #7c3aed, #9333ea); box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);' : '' ?>">
+                <i class="fa-solid <?= $isAdmin ? 'fa-shield-halved' : 'fa-store' ?>"></i>
+                <span class="store-status-dot" title="<?= $isAdmin ? 'Moderasi Admin Aktif' : 'Toko Buka & Aktif' ?>"></span>
             </div>
             <div class="store-profile-info">
-                <div class="store-badge-verified">
-                    <i class="fa-solid fa-circle-check"></i> Mitra UMKM Resmi
+                <div class="store-badge-verified <?= $isAdmin ? 'admin-badge' : '' ?>" style="<?= $isAdmin ? 'background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.35);' : '' ?>">
+                    <i class="fa-solid <?= $isAdmin ? 'fa-user-shield' : 'fa-circle-check' ?>"></i> <?= $isAdmin ? 'Hak Akses Administrator Sistem' : 'Mitra UMKM Resmi' ?>
                 </div>
                 <h1 class="store-title"><?= e($storeName) ?></h1>
                 <p class="store-subtitle">
-                    <i class="fa-solid fa-utensils"></i> Etalase Menu Makanan Hemat Jelang Tutup Toko
+                    <i class="fa-solid <?= $isAdmin ? 'fa-sliders' : 'fa-utensils' ?>"></i> 
+                    <?= $isAdmin ? 'Moderasi & Kelola Seluruh Menu Makanan Hemat dari Semua Mitra Toko' : 'Etalase Menu Makanan Hemat Jelang Tutup Toko' ?>
                 </p>
             </div>
         </div>
@@ -39,11 +41,11 @@ $storeName = currentUser()['nama'] ?? $_SESSION['nama'] ?? 'Mitra Toko';
         <div class="store-header-actions">
             <a href="<?= BASE_URL ?>?url=donation/create" class="btn-store-primary">
                 <i class="fa-solid fa-plus"></i>
-                <span>+ Pasang Menu Promo</span>
+                <span>+ Pasang Menu Baru</span>
             </a>
             <a href="<?= BASE_URL ?>?url=request/incoming" class="btn-store-secondary <?= ($totalPending > 0) ? 'has-pending' : '' ?>">
                 <i class="fa-solid fa-receipt"></i>
-                <span>Periksa Pesanan</span>
+                <span><?= $isAdmin ? 'Semua Pesanan' : 'Periksa Pesanan' ?></span>
                 <?php if ($totalPending > 0): ?>
                     <span class="pending-pill-pulse"><?= $totalPending ?> Baru</span>
                 <?php endif; ?>
@@ -177,6 +179,11 @@ $storeName = currentUser()['nama'] ?? $_SESSION['nama'] ?? 'Mitra Toko';
                         </div>
 
                         <div class="mobile-card-info">
+                            <?php if ($isAdmin && !empty($item['nama_donatur'])): ?>
+                                <div style="font-size: 0.76rem; font-weight: 750; color: #a855f7; margin-bottom: 3px; display: flex; align-items: center; gap: 5px;">
+                                    <i class="fa-solid fa-store"></i> <?= e($item['nama_donatur']) ?>
+                                </div>
+                            <?php endif; ?>
                             <h3 class="mobile-card-title">
                                 <a href="<?= BASE_URL ?>?url=donation/show/<?= (int)$item['id'] ?>">
                                     <?= e($item['judul']) ?>
@@ -246,7 +253,7 @@ $storeName = currentUser()['nama'] ?? $_SESSION['nama'] ?? 'Mitra Toko';
                             <span>Lihat</span>
                         </a>
 
-                        <?php if ($item['status'] !== 'selesai' && $item['status'] !== 'kedaluwarsa'): ?>
+                        <?php if ($item['status'] !== 'selesai' && $item['status'] !== 'kedaluwarsa' || $isAdmin): ?>
                             <a href="<?= BASE_URL ?>?url=donation/edit/<?= (int)$item['id'] ?>" class="btn-card-touch btn-touch-edit" title="Ubah Data Menu">
                                 <i class="fa-solid fa-pen-to-square"></i>
                                 <span>Ubah</span>
@@ -302,6 +309,11 @@ $storeName = currentUser()['nama'] ?? $_SESSION['nama'] ?? 'Mitra Toko';
                                 </td>
 
                                 <td>
+                                    <?php if ($isAdmin && !empty($item['nama_donatur'])): ?>
+                                        <div style="font-size: 0.76rem; font-weight: 750; color: #a855f7; margin-bottom: 3px; display: inline-flex; align-items: center; gap: 5px;">
+                                            <i class="fa-solid fa-store"></i> Toko: <?= e($item['nama_donatur']) ?>
+                                        </div>
+                                    <?php endif; ?>
                                     <strong class="table-item-title">
                                         <a href="<?= BASE_URL ?>?url=donation/show/<?= (int)$item['id'] ?>">
                                             <?= e($item['judul']) ?>
@@ -361,13 +373,13 @@ $storeName = currentUser()['nama'] ?? $_SESSION['nama'] ?? 'Mitra Toko';
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
                                         
-                                        <?php if ($item['status'] !== 'selesai' && $item['status'] !== 'kedaluwarsa'): ?>
+                                        <?php if ($item['status'] !== 'selesai' && $item['status'] !== 'kedaluwarsa' || $isAdmin): ?>
                                             <a href="<?= BASE_URL ?>?url=donation/edit/<?= (int)$item['id'] ?>" class="btn-3d btn-3d-secondary btn-sm" title="Ubah Data Menu">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </a>
                                         <?php endif; ?>
 
-                                        <form action="<?= BASE_URL ?>?url=donation/destroy/<?= (int)$item['id'] ?>" method="POST" style="display: inline;" data-confirm="Hapus menu promo ini secara permanen?">
+                                        <form action="<?= BASE_URL ?>?url=donation/destroy/<?= (int)$item['id'] ?>" method="POST" style="display: inline;" data-confirm="Hapus menu promo '<?= e($item['judul']) ?>' secara permanen?">
                                             <input type="hidden" name="csrf" value="<?= e(csrf_token()) ?>">
                                             <button type="submit" class="btn-3d btn-3d-danger btn-sm" title="Hapus Menu">
                                                 <i class="fa-solid fa-trash"></i>

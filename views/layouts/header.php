@@ -108,22 +108,22 @@ $isActorPage = (
                             <?php else: // Admin ?>
                                 <li>
                                     <a href="<?= BASE_URL ?>?url=donation/mine" class="nav-link <?= str_starts_with($currentUrl, 'donation/mine') ? 'active' : '' ?>">
-                                        <i class="fa-solid fa-store" style="color: var(--primary);"></i> Etalase
+                                        <i class="fa-solid fa-list-check" style="color: #a855f7;"></i> Kelola Menu
                                     </a>
                                 </li>
                                 <li>
                                     <a href="<?= BASE_URL ?>?url=request/incoming" class="nav-link <?= str_starts_with($currentUrl, 'request/incoming') ? 'active' : '' ?>">
-                                        <i class="fa-solid fa-receipt" style="color: var(--primary);"></i> Pesanan
+                                        <i class="fa-solid fa-receipt" style="color: #a855f7;"></i> Semua Pesanan
                                     </a>
                                 </li>
                                 <li>
                                     <a href="<?= BASE_URL ?>?url=donation/create" class="nav-link <?= str_starts_with($currentUrl, 'donation/create') ? 'active' : '' ?>">
-                                        <i class="fa-solid fa-circle-plus" style="color: var(--primary);"></i> Pasang Menu
+                                        <i class="fa-solid fa-circle-plus" style="color: #a855f7;"></i> Pasang Menu
                                     </a>
                                 </li>
                                 <li>
                                     <a href="<?= BASE_URL ?>?url=history/index" class="nav-link <?= str_starts_with($currentUrl, 'history/') ? 'active' : '' ?>">
-                                        <i class="fa-solid fa-clock-rotate-left" style="color: var(--primary);"></i> Riwayat
+                                        <i class="fa-solid fa-clock-rotate-left" style="color: #a855f7;"></i> Riwayat Sistem
                                     </a>
                                 </li>
                             <?php endif; ?>
@@ -257,7 +257,7 @@ $isActorPage = (
                             <?php 
                                 if ($currentUser['role'] === 'donatur') echo '<i class="fa-solid fa-store" style="color: var(--primary);"></i> Mitra Toko / UMKM';
                                 elseif ($currentUser['role'] === 'penerima') echo '<i class="fa-solid fa-heart" style="color: #f87171;"></i> Penyelamat Pangan';
-                                else echo e($currentUser['role']);
+                                else echo '<i class="fa-solid fa-shield-halved" style="color: #a855f7;"></i> Administrator Sistem';
                             ?>
                         </span>
                     </div>
@@ -271,6 +271,10 @@ $isActorPage = (
                     <?php elseif ($userRole === 'penerima'): ?>
                         <a href="<?= BASE_URL ?>?url=request/mine" class="btn-pill-emerald" style="justify-content: center; width: 100%; padding: 11px; margin-bottom: 12px;">
                             <i class="fa-solid fa-bag-shopping"></i> Buka Pesanan Saya
+                        </a>
+                    <?php elseif ($userRole === 'admin'): ?>
+                        <a href="<?= BASE_URL ?>?url=donation/mine" class="btn-pill-emerald" style="justify-content: center; width: 100%; padding: 11px; margin-bottom: 12px; background: linear-gradient(135deg, #7c3aed, #9333ea);">
+                            <i class="fa-solid fa-shield-halved"></i> Buka Panel Admin
                         </a>
                     <?php endif; ?>
                 <?php endif; ?>
@@ -323,19 +327,25 @@ $isActorPage = (
                         <?php else: ?>
                             <li>
                                 <a href="<?= BASE_URL ?>?url=donation/mine" class="drawer-link <?= str_starts_with($currentUrl, 'donation/mine') ? 'active' : '' ?>">
-                                    <span class="drawer-icon-wrap"><i class="fa-solid fa-store"></i></span>
-                                    <span class="drawer-label">Etalase Toko</span>
+                                    <span class="drawer-icon-wrap" style="color: #a855f7;"><i class="fa-solid fa-list-check"></i></span>
+                                    <span class="drawer-label">Kelola Semua Menu</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="<?= BASE_URL ?>?url=request/incoming" class="drawer-link <?= str_starts_with($currentUrl, 'request/incoming') ? 'active' : '' ?>">
-                                    <span class="drawer-icon-wrap"><i class="fa-solid fa-receipt"></i></span>
-                                    <span class="drawer-label">Semua Pesanan</span>
+                                    <span class="drawer-icon-wrap" style="color: #a855f7;"><i class="fa-solid fa-receipt"></i></span>
+                                    <span class="drawer-label">Semua Pesanan Toko</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= BASE_URL ?>?url=donation/create" class="drawer-link <?= (str_starts_with($currentUrl, 'donation/create') || str_starts_with($currentUrl, 'donation/edit')) ? 'active' : '' ?>">
+                                    <span class="drawer-icon-wrap" style="color: #a855f7;"><i class="fa-solid fa-circle-plus"></i></span>
+                                    <span class="drawer-label">+ Pasang Menu Baru</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="<?= BASE_URL ?>?url=history/index" class="drawer-link <?= str_starts_with($currentUrl, 'history/') ? 'active' : '' ?>">
-                                    <span class="drawer-icon-wrap"><i class="fa-solid fa-clock-rotate-left"></i></span>
+                                    <span class="drawer-icon-wrap" style="color: #a855f7;"><i class="fa-solid fa-clock-rotate-left"></i></span>
                                     <span class="drawer-label">Riwayat Sistem</span>
                                 </a>
                             </li>

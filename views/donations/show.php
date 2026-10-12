@@ -213,22 +213,26 @@ $persenHemat = discountPercent($hargaAsli, $hargaDiskon);
             <!-- Contextual Action Buttons / Claim Form -->
             <div style="margin-top: 12px;">
                 <?php if ($isMyDonation): ?>
-                    <!-- Owner Controls -->
-                    <div style="background: var(--bg-surface-muted); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                    <!-- Owner / Administrator Controls -->
+                    <div style="background: var(--bg-surface-muted); padding: 18px; border-radius: var(--radius-md); border: 1px solid <?= ($isAdmin ?? false) ? 'rgba(168, 85, 247, 0.4)' : 'var(--border-color)' ?>;">
                         <strong style="display: block; font-size: 0.95rem; margin-bottom: 12px; color: var(--text-main);">
-                            <i class="fa-solid fa-user-shield"></i> Anda adalah pemilik menu promo ini
+                            <?php if ($isAdmin ?? false): ?>
+                                <i class="fa-solid fa-shield-halved" style="color: #a855f7;"></i> Panel Moderasi Administrator Sistem
+                            <?php else: ?>
+                                <i class="fa-solid fa-user-shield" style="color: var(--primary);"></i> Anda adalah pemilik menu promo ini
+                            <?php endif; ?>
                         </strong>
                         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                             <a href="<?= BASE_URL ?>?url=donation/edit/<?= (int)$donation['id'] ?>" class="btn-3d btn-3d-secondary btn-sm">
                                 <i class="fa-solid fa-pen-to-square"></i> Ubah Data Promo
                             </a>
                             <a href="<?= BASE_URL ?>?url=request/incoming" class="btn-3d btn-3d-primary btn-sm">
-                                <i class="fa-solid fa-receipt"></i> Cek Pesanan Masuk
+                                <i class="fa-solid fa-receipt"></i> <?= ($isAdmin ?? false) ? 'Periksa Pesanan Toko' : 'Cek Pesanan Masuk' ?>
                             </a>
-                            <form action="<?= BASE_URL ?>?url=donation/destroy/<?= (int)$donation['id'] ?>" method="POST" style="display: inline;" data-confirm="Apakah Anda yakin ingin menghapus menu promo ini secara permanen?">
+                            <form action="<?= BASE_URL ?>?url=donation/destroy/<?= (int)$donation['id'] ?>" method="POST" style="display: inline;" data-confirm="Apakah Anda yakin ingin menghapus menu promo '<?= e($donation['judul']) ?>' secara permanen?">
                                 <input type="hidden" name="csrf" value="<?= e(csrf_token()) ?>">
                                 <button type="submit" class="btn-3d btn-3d-danger btn-sm">
-                                    <i class="fa-solid fa-trash"></i> Hapus
+                                    <i class="fa-solid fa-trash"></i> Hapus Menu Ini
                                 </button>
                             </form>
                         </div>

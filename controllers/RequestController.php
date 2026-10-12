@@ -383,16 +383,25 @@ class RequestController {
     }
 
     /**
-     * Layar Permintaan Masuk (Untuk Donatur)
+     * Layar Permintaan Masuk (Untuk Donatur & Admin)
      */
     public function incoming(): void {
         requireLogin();
-        $userId = (int)$_SESSION['user_id'];
-        $requests = $this->requestModel->incomingForDonatur($userId);
+        $isAdmin = (($_SESSION['role'] ?? '') === 'admin');
+        $userId  = (int)$_SESSION['user_id'];
+
+        if ($isAdmin) {
+            $requests  = $this->requestModel->allForAdmin();
+            $pageTitle = 'Semua Pesanan Masuk (Admin) - Berbagi Rasa';
+        } else {
+            $requests  = $this->requestModel->incomingForDonatur($userId);
+            $pageTitle = 'Pesanan Masuk Toko - Berbagi Rasa';
+        }
 
         view('requests/incoming', [
-            'pageTitle' => 'Permintaan Masuk - Berbagi Rasa',
+            'pageTitle' => $pageTitle,
             'requests'  => $requests,
+            'isAdmin'   => $isAdmin,
         ]);
     }
 

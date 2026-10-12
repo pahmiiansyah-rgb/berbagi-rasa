@@ -247,6 +247,8 @@ class Donation {
         $this->markExpired();
         $stmt = $this->db->query(
             "SELECT d.*, u.nama AS nama_donatur, u.email AS email_donatur,
+                    (SELECT COUNT(*) FROM requests r WHERE r.donation_id = d.id AND r.status = 'menunggu') AS pending_requests_count,
+                    (SELECT COUNT(*) FROM requests r WHERE r.donation_id = d.id) AS total_requests_count,
                     (SELECT COUNT(*) FROM requests r WHERE r.donation_id = d.id) AS total_requests
              FROM donations d
              JOIN users u ON u.id = d.user_id
@@ -256,9 +258,15 @@ class Donation {
     }
 
     /**
-     * Menghapus penawaran makanan
+     * Menghapus penawaran makanan secara aman (termasuk relasi log dan request)
      */
     public function delete(int $id): bool {
+        try {
+            $this->db->prepare('DELETE FROM status_logs WHERE donation_id = :id')->execute([':id' => $id]);
+            $this->db->prepare('DELETE FROM requests WHERE donation_id = :id')->execute([':id' => $id]);
+        } catch (Throwable $e) {
+            // Lanjutkan jika cascading FK sudah dijalankan oleh database engine
+        }
         $stmt = $this->db->prepare('DELETE FROM donations WHERE id = :id');
         return $stmt->execute([':id' => $id]);
     }

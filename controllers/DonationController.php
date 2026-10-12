@@ -63,7 +63,8 @@ class DonationController {
         }
 
         $userId = (int)($_SESSION['user_id'] ?? 0);
-        $isMyDonation = ($userId > 0 && (int)$donation['user_id'] === $userId);
+        $isAdmin = (($_SESSION['role'] ?? '') === 'admin');
+        $isMyDonation = ($userId > 0 && ((int)$donation['user_id'] === $userId || $isAdmin));
         
         $myActiveRequest = null;
         if ($userId > 0 && !$isMyDonation) {
@@ -76,6 +77,7 @@ class DonationController {
             'pageTitle'       => e($donation['judul']) . ' - Berbagi Rasa',
             'donation'        => $donation,
             'isMyDonation'    => $isMyDonation,
+            'isAdmin'         => $isAdmin,
             'myActiveRequest' => $myActiveRequest,
             'logs'            => $logs,
         ]);
@@ -257,12 +259,13 @@ class DonationController {
             redirect(BASE_URL . '?url=donation/mine');
         }
 
-        if (!isOwner((int)$donation['user_id'])) {
+        $isAdmin = (($_SESSION['role'] ?? '') === 'admin');
+        if (!isOwner((int)$donation['user_id']) && !$isAdmin) {
             setFlash('error', 'Akses ditolak. Anda bukan pemilik menu ini.');
             redirect(BASE_URL . '?url=donation/mine');
         }
 
-        if ($donation['status'] === 'selesai' || $donation['status'] === 'kedaluwarsa') {
+        if (!$isAdmin && ($donation['status'] === 'selesai' || $donation['status'] === 'kedaluwarsa')) {
             setFlash('warning', 'Menu yang sudah selesai atau kedaluwarsa tidak dapat diubah.');
             redirect(BASE_URL . '?url=donation/mine');
         }
@@ -281,8 +284,9 @@ class DonationController {
         requireLogin();
         $donationId = (int)$id;
         $donation = $this->donationModel->findById($donationId);
+        $isAdmin = (($_SESSION['role'] ?? '') === 'admin');
 
-        if (!$donation || !isOwner((int)$donation['user_id'])) {
+        if (!$donation || (!isOwner((int)$donation['user_id']) && !$isAdmin)) {
             setFlash('error', 'Menu makanan tidak ditemukan atau akses ditolak.');
             redirect(BASE_URL . '?url=donation/mine');
         }
@@ -435,8 +439,23 @@ class DonationController {
 
         $activeRequests = $this->requestModel->findActiveByDonation($donationId);
         if (!empty($activeRequests)) {
-            setFlash('error', 'Menu ini tidak dapat dihapus karena masih ada pesanan aktif (menunggu atau disetujui).');
-            redirect(BASE_URL . '?url=donation/mine');
+            if ($isAdmin) {
+                // Admin berhak penuh: batalkan pesanan aktif secara otomatis dengan catatan audit
+                foreach ($activeRequests as $req) {
+                    $this->requestModel->updateStatus((int)$req['id'], 'dibatalkan');
+                    $this->logModel->log(
+                        $donationId,
+                        (int)$req['id'],
+                        $req['status'],
+                        'dibatalkan',
+                        (int)$_SESSION['user_id'],
+                        "Pesanan dibatalkan otomatis karena menu dihapus oleh Administrator."
+                    );
+                }
+            } else {
+                setFlash('error', 'Menu ini tidak dapat dihapus karena masih ada pesanan aktif (menunggu atau disetujui). Hubungi Administrator jika perlu pembatalan khusus.');
+                redirect(BASE_URL . '?url=donation/mine');
+            }
         }
 
         if (!empty($donation['foto'])) {
@@ -447,21 +466,31 @@ class DonationController {
         }
 
         $this->donationModel->delete($donationId);
-        setFlash('success', 'Menu makanan berhasil dihapus dari sistem.');
+        $roleLabel = $isAdmin ? 'Administrator' : 'pemilik toko';
+        setFlash('success', "Menu makanan '{$donation['judul']}' berhasil dihapus dari sistem oleh {$roleLabel}.");
         redirect(BASE_URL . '?url=donation/mine');
     }
 
     /**
-     * Halaman Etalase Toko Saya (Khusus Donatur/Mitra Toko)
+     * Halaman Etalase Toko Saya / Kelola Semua Menu (Admin)
      */
     public function mine(): void {
         requireRole('donatur');
-        $userId    = (int)$_SESSION['user_id'];
-        $donations = $this->donationModel->myByUser($userId);
+        $isAdmin = (($_SESSION['role'] ?? '') === 'admin');
+        $userId  = (int)$_SESSION['user_id'];
+
+        if ($isAdmin) {
+            $donations = $this->donationModel->allForAdmin();
+            $pageTitle = 'Kelola Semua Menu Toko (Admin) - Berbagi Rasa';
+        } else {
+            $donations = $this->donationModel->myByUser($userId);
+            $pageTitle = 'Etalase Toko Saya - Berbagi Rasa';
+        }
 
         view('donations/mine', [
-            'pageTitle' => 'Etalase Toko Saya - Berbagi Rasa',
+            'pageTitle' => $pageTitle,
             'donations' => $donations,
+            'isAdmin'   => $isAdmin,
         ]);
     }
 }

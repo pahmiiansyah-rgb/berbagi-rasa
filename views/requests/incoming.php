@@ -4,6 +4,7 @@
  * Mobile-First & Responsive Dual Layout (Mobile Order Cards + Desktop Table)
  */
 $requestsList = $requests ?? [];
+$isAdmin = ($isAdmin ?? false) || (($_SESSION['role'] ?? '') === 'admin');
 $totalOrders  = count($requestsList);
 $countMenunggu  = count(array_filter($requestsList, fn($r) => $r['status'] === 'menunggu'));
 $countDisetujui = count(array_filter($requestsList, fn($r) => $r['status'] === 'disetujui'));
@@ -16,19 +17,19 @@ $countSelesai   = count(array_filter($requestsList, fn($r) => in_array($r['statu
         <div>
             <div class="incoming-back-wrap">
                 <a href="<?= BASE_URL ?>?url=donation/mine" class="incoming-back-link">
-                    <i class="fa-solid fa-arrow-left"></i> Kembali ke Etalase Toko
+                    <i class="fa-solid fa-arrow-left"></i> Kembali ke <?= $isAdmin ? 'Kelola Semua Menu' : 'Etalase Toko' ?>
                 </a>
             </div>
             <h1 class="incoming-title">
-                <i class="fa-solid fa-receipt text-emerald"></i> Pesanan Masuk Toko
+                <i class="fa-solid <?= $isAdmin ? 'fa-shield-halved' : 'fa-receipt' ?> text-emerald"></i> <?= $isAdmin ? 'Semua Pesanan Masuk (Admin)' : 'Pesanan Masuk Toko' ?>
             </h1>
             <p class="incoming-subtitle">
-                Konfirmasi pesanan menu hemat dan terbitkan kode ambil kasir untuk pembeli sebelum jam tutup toko
+                <?= $isAdmin ? 'Pantau dan kelola seluruh transaksi dan pesanan makanan hemat dari semua mitra toko' : 'Konfirmasi pesanan menu hemat dan terbitkan kode ambil kasir untuk pembeli sebelum jam tutup toko' ?>
             </p>
         </div>
 
         <a href="<?= BASE_URL ?>?url=donation/mine" class="btn-store-secondary">
-            <i class="fa-solid fa-store"></i> Kelola Etalase
+            <i class="fa-solid <?= $isAdmin ? 'fa-list-check' : 'fa-store' ?>"></i> <?= $isAdmin ? 'Kelola Semua Menu' : 'Kelola Etalase' ?>
         </a>
     </div>
 
@@ -143,6 +144,11 @@ $countSelesai   = count(array_filter($requestsList, fn($r) => in_array($r['statu
 
                     <!-- Menu & Pembayaran -->
                     <div class="order-food-box">
+                        <?php if ($isAdmin && !empty($req['nama_donatur'])): ?>
+                            <div style="font-size: 0.76rem; font-weight: 750; color: #c084fc; margin-bottom: 4px; display: flex; align-items: center; gap: 5px;">
+                                <i class="fa-solid fa-store"></i> Toko: <?= e($req['nama_donatur']) ?>
+                            </div>
+                        <?php endif; ?>
                         <div class="order-food-title">
                             <a href="<?= BASE_URL ?>?url=donation/show/<?= (int)$req['donation_id'] ?>">
                                 <?= e($req['judul_donasi']) ?>
@@ -251,6 +257,11 @@ $countSelesai   = count(array_filter($requestsList, fn($r) => in_array($r['statu
                                 </td>
 
                                 <td>
+                                    <?php if ($isAdmin && !empty($req['nama_donatur'])): ?>
+                                        <div style="font-size: 0.76rem; font-weight: 750; color: #c084fc; margin-bottom: 3px; display: flex; align-items: center; gap: 5px;">
+                                            <i class="fa-solid fa-store"></i> <?= e($req['nama_donatur']) ?>
+                                        </div>
+                                    <?php endif; ?>
                                     <strong style="font-size: 0.95rem; display: block;">
                                         <a href="<?= BASE_URL ?>?url=donation/show/<?= (int)$req['donation_id'] ?>" style="color: #ffffff; text-decoration: none;">
                                             <?= e($req['judul_donasi']) ?>
