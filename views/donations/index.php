@@ -138,7 +138,7 @@
     <!-- Section Title & Results Count -->
     <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; flex-wrap: wrap; gap: 12px;">
         <div>
-            <h2 style="font-size: 1.65rem; font-weight: 800; color: #ffffff; letter-spacing: -0.02em; margin-bottom: 6px;">
+            <h2 style="font-size: 1.48rem; font-weight: 800; color: #ffffff; letter-spacing: -0.02em; margin-bottom: 6px;">
                 Menu Siap Tebus Malam Ini
             </h2>
             <p style="font-size: 0.9rem; color: #94a3b8; margin: 0;">
@@ -279,7 +279,7 @@
             <span class="mission-badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">
                 <i class="fa-solid fa-hand-holding-heart"></i> Ekosistem Layanan
             </span>
-            <h2 style="font-size: 2.1rem; font-weight: 850; color: #ffffff; letter-spacing: -0.03em; margin: 12px 0 10px 0;">
+            <h2 style="font-size: 1.85rem; font-weight: 800; color: #ffffff; letter-spacing: -0.025em; margin: 12px 0 10px 0;">
                 Solusi Terintegrasi Penyelamatan Pangan
             </h2>
             <p style="color: #94a3b8; font-size: 0.98rem; line-height: 1.6; margin: 0;">

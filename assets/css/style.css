@@ -720,37 +720,37 @@ main.main-content.has-homepage-hero {
 }
 
 .hero-editorial-content {
-    max-width: 580px;
+    max-width: 620px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
-    gap: 24px;
+    gap: 22px;
 }
 
 .hero-editorial-title {
-    font-size: clamp(3rem, 5.8vw, 4.8rem);
-    font-weight: 850;
-    line-height: 1.04;
+    font-size: clamp(2.65rem, 5.1vw, 4.25rem);
+    font-weight: 800;
+    line-height: 1.12;
     color: #ffffff;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.03em;
     text-shadow: 0 4px 25px rgba(0, 0, 0, 0.85);
 }
 
 .hero-editorial-subtitle {
-    font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+    font-size: clamp(0.96rem, 1.4vw, 1.12rem);
     color: #cbd5e1;
-    line-height: 1.55;
-    max-width: 480px;
+    line-height: 1.62;
+    max-width: 520px;
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
 }
 
 .hero-editorial-actions {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
     flex-wrap: wrap;
-    margin-top: 10px;
+    margin-top: 6px;
 }
 
 /* Pill CTA Buttons (Shopify Style White & Ghost) */
@@ -758,9 +758,9 @@ main.main-content.has-homepage-hero {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 13px 28px;
-    font-size: 0.98rem;
-    font-weight: 750;
+    padding: 11px 24px;
+    font-size: 0.91rem;
+    font-weight: 700;
     color: #06090e;
     background: #ffffff;
     border-radius: var(--radius-full);
@@ -782,9 +782,9 @@ main.main-content.has-homepage-hero {
 .btn-shopify-pill-ghost, .btn-pill-secondary {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    padding: 10px 22px 10px 14px;
-    font-size: 0.96rem;
+    gap: 10px;
+    padding: 9px 20px 9px 12px;
+    font-size: 0.89rem;
     font-weight: 600;
     color: #ffffff;
     background: rgba(0, 0, 0, 0.45);
@@ -1165,10 +1165,10 @@ select.form-control-cinematic {
 }
 
 .mission-title {
-    font-size: clamp(1.8rem, 3vw, 2.3rem);
-    font-weight: 850;
+    font-size: clamp(1.62rem, 2.7vw, 2.05rem);
+    font-weight: 800;
     color: #ffffff;
-    line-height: 1.2;
+    line-height: 1.25;
     letter-spacing: -0.025em;
     margin-bottom: 16px;
 }
@@ -2527,11 +2527,11 @@ body.mobile-drawer-locked {
         padding: 120px 18px 48px !important;
     }
     .hero-editorial-title {
-        font-size: clamp(2.1rem, 7.8vw, 3.2rem) !important;
-        line-height: 1.1 !important;
+        font-size: clamp(1.85rem, 6.8vw, 2.85rem) !important;
+        line-height: 1.15 !important;
     }
     .hero-editorial-subtitle {
-        font-size: 0.95rem !important;
+        font-size: 0.9rem !important;
         line-height: 1.55 !important;
     }
     .hero-editorial-actions {
@@ -2675,7 +2675,7 @@ body.mobile-drawer-locked {
         display: none !important; /* On ultra-small screens, icon alone keeps navbar ultra clean */
     }
     .hero-editorial-title {
-        font-size: 2rem !important;
+        font-size: 1.78rem !important;
     }
 }
 
@@ -3014,7 +3014,7 @@ body.mobile-drawer-locked {
 }
 
 .service-title {
-    font-size: 1.28rem;
+    font-size: 1.15rem;
     font-weight: 800;
     color: #ffffff;
     letter-spacing: -0.02em;
