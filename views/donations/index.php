@@ -30,8 +30,8 @@
             </p>
 
             <div class="hero-editorial-actions">
-                <a href="<?= BASE_URL ?>?url=donation/catalog" class="btn-shopify-white">
-                    <i class="fa-solid fa-bowl-food"></i> Lihat Menu Makanan Malam Ini
+                <a href="#fitur" class="btn-shopify-white">
+                    <i class="fa-solid fa-sparkles"></i> Pelajari Fitur Platform
                 </a>
                 <a href="#cara-kerja" class="btn-shopify-pill-ghost">
                     <span class="play-icon-circle"><i class="fa-solid fa-circle-question"></i></span>
@@ -131,8 +131,8 @@
                     </p>
                 </div>
                 <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.06);">
-                    <a href="<?= BASE_URL ?>?url=donation/catalog" style="font-size: 0.9rem; font-weight: 700; color: #10b981; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
-                        Buka Katalog Menu Tersedia <i class="fa-solid fa-arrow-right"></i>
+                    <a href="#fitur" style="font-size: 0.9rem; font-weight: 700; color: #10b981; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                        Lihat Fitur Lengkap <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
@@ -406,8 +406,8 @@
                         <a href="<?= BASE_URL ?>?url=auth/register" class="btn-shopify-white" style="padding: 13px 26px;">
                             <i class="fa-solid fa-circle-plus"></i> Daftarkan Toko Anda Gratis
                         </a>
-                        <a href="<?= BASE_URL ?>?url=donation/catalog" class="btn-shopify-pill-ghost" style="padding: 13px 24px;">
-                            Buka Katalog Menu
+                        <a href="#tentang" class="btn-shopify-pill-ghost" style="padding: 13px 24px;">
+                            Baca Cerita Gerakan
                         </a>
                     <?php elseif (($_SESSION['role'] ?? '') === 'donatur'): ?>
                         <a href="<?= BASE_URL ?>?url=donation/create" class="btn-shopify-white" style="padding: 13px 26px;">
@@ -417,8 +417,8 @@
                             Buka Etalase Toko
                         </a>
                     <?php else: ?>
-                        <a href="<?= BASE_URL ?>?url=donation/catalog" class="btn-shopify-white" style="padding: 13px 26px;">
-                            <i class="fa-solid fa-bowl-food"></i> Buka Katalog Makanan
+                        <a href="<?= BASE_URL ?>?url=request/mine" class="btn-shopify-white" style="padding: 13px 26px;">
+                            <i class="fa-solid fa-bag-shopping"></i> Lihat Pesanan Saya
                         </a>
                     <?php endif; ?>
                 </div>

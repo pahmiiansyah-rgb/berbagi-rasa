@@ -18,50 +18,11 @@ class DonationController {
      * Halaman Utama / Landing Page Pengenalan Gerakan Berbagi Rasa
      */
     public function index(): void {
-        // Jika ada filter atau pencarian dari luar, arahkan ke katalog
-        if (!empty($_GET['q']) || !empty($_GET['lokasi']) || !empty($_GET['harga']) || !empty($_GET['kategori'])) {
-            $this->catalog();
-            return;
-        }
-
         $stats = $this->donationModel->getStats();
 
         view('donations/index', [
             'pageTitle' => 'Berbagi Rasa — Makanan Enak Ramah Kantong Sebelum Toko Tutup',
             'stats'     => $stats,
-        ]);
-    }
-
-    /**
-     * Halaman Katalog Makanan Siap Tebus
-     */
-    public function catalog(): void {
-        $keyword     = trim($_GET['q'] ?? '');
-        $lokasi      = trim($_GET['lokasi'] ?? '');
-        $kategori    = trim($_GET['kategori'] ?? '');
-        $filterHarga = trim($_GET['harga'] ?? '');
-        $page        = max(1, (int)($_GET['page'] ?? 1));
-        $limit       = 12;
-        $offset      = ($page - 1) * $limit;
-
-        $totalItems = $this->donationModel->countAvailable($keyword, $lokasi, $kategori, $filterHarga);
-        $totalPages = (int)ceil($totalItems / $limit);
-        $donations  = $this->donationModel->allAvailable($keyword, $lokasi, $kategori, $filterHarga, $limit, $offset);
-        $locations  = $this->donationModel->distinctLocations();
-        $stats      = $this->donationModel->getStats();
-
-        view('donations/catalog', [
-            'pageTitle'   => 'Katalog Menu Siap Tebus Jelang Tutup Toko - Berbagi Rasa',
-            'donations'   => $donations,
-            'keyword'     => $keyword,
-            'lokasi'      => $lokasi,
-            'kategori'    => $kategori,
-            'filterHarga' => $filterHarga,
-            'locations'   => $locations,
-            'page'        => $page,
-            'totalPages'  => $totalPages,
-            'totalItems'  => $totalItems,
-            'stats'       => $stats,
         ]);
     }
 

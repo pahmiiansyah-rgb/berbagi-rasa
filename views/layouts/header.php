@@ -153,11 +153,6 @@ $isActorPage = (
                                 </a>
                             </li>
                             <li>
-                                <a href="<?= BASE_URL ?>?url=donation/catalog" class="nav-link <?= ($currentUrl === 'donation/catalog') ? 'active' : '' ?>">
-                                    <i class="fa-solid fa-utensils" style="color: #10b981;"></i> Katalog Makanan
-                                </a>
-                            </li>
-                            <li>
                                 <a href="<?= $isHomePage ? '#mitra' : BASE_URL . '?url=donation/index#mitra' ?>" class="nav-link">
                                     Untuk Pemilik Usaha
                                 </a>
@@ -171,9 +166,9 @@ $isActorPage = (
                     <div class="nav-actions desktop-nav-actions">
                         <?php if ($currentUser): ?>
                             <?php if ($isActorPage): ?>
-                                <a href="<?= BASE_URL ?>?url=donation/catalog" class="btn-portal-public-web" title="Lihat Website & Katalog Publik">
-                                    <i class="fa-solid fa-utensils"></i>
-                                    <span class="btn-portal-text">Katalog Makanan</span>
+                                <a href="<?= BASE_URL ?>?url=donation/index" class="btn-portal-public-web" title="Lihat Website Publik">
+                                    <i class="fa-solid fa-globe"></i>
+                                    <span class="btn-portal-text">Website Publik</span>
                                 </a>
                             <?php else: ?>
                                 <?php if ($userRole === 'donatur'): ?>
@@ -367,9 +362,9 @@ $isActorPage = (
                     </div>
                     <ul class="drawer-nav-list">
                         <li>
-                            <a href="<?= BASE_URL ?>?url=donation/catalog" class="drawer-link">
-                                <span class="drawer-icon-wrap"><i class="fa-solid fa-utensils"></i></span>
-                                <span class="drawer-label">Katalog Makanan Siap Tebus</span>
+                            <a href="<?= BASE_URL ?>?url=donation/index" class="drawer-link">
+                                <span class="drawer-icon-wrap"><i class="fa-solid fa-globe"></i></span>
+                                <span class="drawer-label">Halaman Beranda</span>
                             </a>
                         </li>
                     </ul>
@@ -398,12 +393,6 @@ $isActorPage = (
                             <a href="<?= $isHomePage ? '#tentang' : BASE_URL . '?url=donation/index#tentang' ?>" class="drawer-link">
                                 <span class="drawer-icon-wrap"><i class="fa-solid fa-heart"></i></span>
                                 <span class="drawer-label">Cerita Gerakan</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= BASE_URL ?>?url=donation/catalog" class="drawer-link <?= ($currentUrl === 'donation/catalog') ? 'active' : '' ?>">
-                                <span class="drawer-icon-wrap" style="color: #10b981;"><i class="fa-solid fa-utensils"></i></span>
-                                <span class="drawer-label">Katalog Makanan Siap Tebus</span>
                             </a>
                         </li>
                         <li>
