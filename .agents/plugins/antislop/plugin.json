@@ -1,0 +1,5 @@
+﻿{
+  "name": "antislop",
+  "description": "Rules for an AI coding agent to filter out generic AI-generated UI designs, text, and code.",
+  "version": "1.0.0"
+}

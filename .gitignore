@@ -1,0 +1,19 @@
+# OS & System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Temporary & Log files
+*.log
+*.tmp
+error_log
+
+# Uploads directory - preserve structure but ignore user uploads
+assets/uploads/*
+!assets/uploads/index.html
