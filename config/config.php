@@ -6,6 +6,9 @@
 // Set Zona Waktu Indonesia Barat (WIB)
 date_default_timezone_set('Asia/Jakarta');
 
+// Sembunyikan deprecated warnings pada environment web produksi agar tampilan selalu bersih
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
+
 // Menentukan protokol (http / https) - mendukung reverse proxy Vercel & HTTPS cloud
 $isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
     || (isset($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443)

@@ -109,14 +109,24 @@ class Database {
                 PDO::ATTR_EMULATE_PREPARES   => false,
             ]);
 
-            // Daftarkan fungsi kompatibilitas MySQL untuk SQLite
-            $pdo->sqliteCreateFunction('now', fn() => date('Y-m-d H:i:s'));
-            $pdo->sqliteCreateFunction('date_add', function($date, $interval) {
-                return date('Y-m-d H:i:s', strtotime($interval, strtotime($date)));
-            });
-            $pdo->sqliteCreateFunction('date_sub', function($date, $interval) {
-                return date('Y-m-d H:i:s', strtotime('-' . ltrim($interval, '-'), strtotime($date)));
-            });
+            // Daftarkan fungsi kompatibilitas MySQL untuk SQLite (PHP 8.0 - 8.5+)
+            if (method_exists($pdo, 'createFunction')) {
+                @$pdo->createFunction('now', fn() => date('Y-m-d H:i:s'));
+                @$pdo->createFunction('date_add', function($date, $interval) {
+                    return date('Y-m-d H:i:s', strtotime($interval, strtotime($date)));
+                });
+                @$pdo->createFunction('date_sub', function($date, $interval) {
+                    return date('Y-m-d H:i:s', strtotime('-' . ltrim($interval, '-'), strtotime($date)));
+                });
+            } else {
+                @$pdo->sqliteCreateFunction('now', fn() => date('Y-m-d H:i:s'));
+                @$pdo->sqliteCreateFunction('date_add', function($date, $interval) {
+                    return date('Y-m-d H:i:s', strtotime($interval, strtotime($date)));
+                });
+                @$pdo->sqliteCreateFunction('date_sub', function($date, $interval) {
+                    return date('Y-m-d H:i:s', strtotime('-' . ltrim($interval, '-'), strtotime($date)));
+                });
+            }
 
             @$pdo->exec('PRAGMA foreign_keys = ON;');
             @$pdo->exec('PRAGMA journal_mode = WAL;');
